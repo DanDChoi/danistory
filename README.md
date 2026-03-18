@@ -1,2 +1,0 @@
-# danistory
-resume website
