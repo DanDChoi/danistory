@@ -1,3 +1,8 @@
+"use client";
+import Image from "next/image";
+import { useState } from "react";
+import Link from "next/link";
+
 function ProjectsSection({
     projects,
     openId,
@@ -8,7 +13,7 @@ function ProjectsSection({
     setOpenId: (id: string | null) => void;
 }) {
     return (
-        <section className="border-t pt-10">
+        <section id="projects" className="border-t pt-10">
             <h2 className="text-2xl font-semibold mb-4 tracking-tight">Projects</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -90,10 +95,6 @@ function ProjectsSection({
         </section>
     );
 }
-"use client";
-import Image from "next/image";
-import { useState } from "react";
-import Link from "next/link";
 
 function HeroSection() {
     return (
@@ -105,17 +106,39 @@ function HeroSection() {
                 height={120}
                 className="rounded-full"
             />
-            <h1 className="text-5xl font-bold tracking-tight">Dan</h1>
-            <p className="text-lg text-gray-500">
-                기록하고 개선하는 백엔드 개발자
-            </p>
+
+            <div className="space-y-2">
+                <h1 className="text-5xl font-bold tracking-tight">Dan</h1>
+                <p className="text-lg text-gray-500">
+                    기록하고 개선하는 백엔드 개발자
+                </p>
+                <p className="text-sm text-gray-400">
+                    Danistory — 기록하고 성장하는 개발 여정
+                </p>
+            </div>
+
+            <div className="flex gap-3">
+                <a
+                    href="https://github.com/your-id"
+                    target="_blank"
+                    className="px-4 py-2 bg-black text-white text-sm rounded hover:bg-gray-800"
+                >
+                    GitHub
+                </a>
+                <a
+                    href="mailto:your@email.com"
+                    className="px-4 py-2 border text-sm rounded hover:bg-gray-100"
+                >
+                    Email
+                </a>
+            </div>
         </section>
     );
 }
 
 function AboutSection() {
     return (
-        <section className="border-t pt-10">
+        <section id="about" className="border-t pt-10">
             <h2 className="text-2xl font-semibold mb-4 tracking-tight">About</h2>
             <p className="text-gray-700 leading-relaxed">
                 작은 문제를 반복해서 마주치며, 개선의 실마리를 찾는 개발자입니다.
@@ -140,7 +163,7 @@ function EducationSection() {
 
 function SkillsSection() {
     return (
-        <section className="border-t pt-10">
+        <section id="skills" className="border-t pt-10">
             <h2 className="text-2xl font-semibold mb-4 tracking-tight">Skills</h2>
             <div className="flex flex-wrap gap-2">
                 {["Java", "Spring", "PostgreSQL", "AWS", "Next.js"].map((skill) => (
@@ -155,7 +178,7 @@ function SkillsSection() {
 
 function CareerSection() {
     return (
-        <section className="border-t pt-10">
+        <section id="career" className="border-t pt-10">
             <h2 className="text-2xl font-semibold mb-4 tracking-tight">Career</h2>
             <div>
                 <p className="font-semibold text-lg">(주)엑시온그룹</p>
@@ -172,7 +195,7 @@ function CareerSection() {
 
 function ContactSection() {
     return (
-        <section className="border-t pt-10">
+        <section id="contact" className="border-t pt-10">
             <h2 className="text-2xl font-semibold mb-4 tracking-tight">Contact</h2>
             <p className="text-gray-700">your@email.com</p>
         </section>
@@ -187,7 +210,7 @@ export default function Home() {
             id: "1",
             title: "슬로우 쿼리 개선",
             period: "2023.10 - 2023.12",
-            description: "PostgreSQL 기반의 대형 트랜잭션 쿼리들에 대해 실행 계획 분석 및 인덱스 최적화",
+            summary: "PostgreSQL 기반의 대형 트랜잭션 쿼리들에 대해 실행 계획 분석 및 인덱스 최적화",
             detail: {
                 result: [
                     "로그인, 마이페이지, 주문 상세 등 주요 페이지의 응답 속도 평균 90% 이상 개선",
@@ -296,12 +319,18 @@ export default function Home() {
 
     return (
         <>
-            <header className="max-w-3xl mx-auto mb-12 flex justify-between">
-                <p className="font-semibold">Danistory</p>
+            <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
+                <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+                    <p className="font-semibold">Danistory</p>
 
-                <div className="space-x-4 text-sm text-gray-500 [&>*]:hover:text-black transition">
-                    <Link href="/">Home</Link>
-                    <Link href="/guestbook">Guestbook</Link>
+                    <nav className="space-x-6 text-sm text-gray-500 [&>*]:hover:text-black transition">
+                        <a href="#about">About</a>
+                        <a href="#skills">Skills</a>
+                        <a href="#career">Career</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#contact">Contact</a>
+                        <Link href="/guestbook">Guestbook</Link>
+                    </nav>
                 </div>
             </header>
             <main className="min-h-screen bg-gray-50 text-gray-900 px-6 py-16">
