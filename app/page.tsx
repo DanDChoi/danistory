@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 function ProjectsSection({
@@ -14,13 +14,13 @@ function ProjectsSection({
 }) {
     return (
         <section id="projects" className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight">Projects</h2>
+            <h2 className="text-2xl font-semibold mb-4 tracking-tight leading-tight">Projects</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {projects.map((item) => (
                     <div
                         key={item.id}
-                        className="border border-gray-200 p-6 rounded-2xl cursor-pointer hover:shadow-md hover:border-gray-300 transition bg-white"
+                        className="border border-gray-200 p-6 rounded-2xl cursor-pointer hover:shadow-lg hover:border-gray-300 transition bg-white hover:-translate-y-1"
                         onClick={() =>
                             setOpenId(openId === item.id ? null : item.id)
                         }
@@ -44,7 +44,7 @@ function ProjectsSection({
                             </span>
                         </div>
 
-                        <p className="text-sm text-gray-600 mt-3">
+                        <p className="text-sm text-gray-600 mt-3 leading-relaxed">
                             {item.summary}
                         </p>
 
@@ -60,30 +60,45 @@ function ProjectsSection({
                         </div>
 
                         <div
-                            className={`overflow-hidden transition-all duration-300 ${
-                                openId === item.id ? "max-h-[500px] mt-4 pt-4 border-t" : "max-h-0"
-                            } text-sm text-gray-700 space-y-4`}
+                            className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                                openId === item.id ? "max-h-[600px] mt-5 pt-5 border-t" : "max-h-0"
+                            } text-sm text-gray-700 space-y-5 leading-relaxed`}
                         >
                             {openId === item.id && (
                                 <>
                                     <div>
                                         <p className="font-semibold text-blue-500">성과</p>
                                         {item.detail.result.map((d: string, idx: number) => (
-                                            <p key={idx}>• {d}</p>
+                                            <p
+                                                key={idx}
+                                                className="pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-gray-400"
+                                            >
+                                                {d}
+                                            </p>
                                         ))}
                                     </div>
 
                                     <div>
                                         <p className="font-semibold text-blue-500">역할</p>
                                         {item.detail.role.map((d: string, idx: number) => (
-                                            <p key={idx}>• {d}</p>
+                                            <p
+                                                key={idx}
+                                                className="pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-gray-400"
+                                            >
+                                                {d}
+                                            </p>
                                         ))}
                                     </div>
 
                                     <div>
                                         <p className="font-semibold text-blue-500">기술</p>
                                         {item.detail.techDetail.map((d: string, idx: number) => (
-                                            <p key={idx}>• {d}</p>
+                                            <p
+                                                key={idx}
+                                                className="pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-gray-400"
+                                            >
+                                                {d}
+                                            </p>
                                         ))}
                                     </div>
                                 </>
@@ -98,7 +113,7 @@ function ProjectsSection({
 
 function HeroSection() {
     return (
-        <section className="space-y-6">
+        <section className="space-y-8 pt-6">
             <Image
                 src="/profile.jpg"
                 alt="profile"
@@ -116,8 +131,7 @@ function HeroSection() {
                     Danistory — 기록하고 성장하는 개발 여정
                 </p>
             </div>
-
-            <div className="flex gap-3">
+            <div className="flex gap-3 pt-2 flex-wrap">
                 <a
                     href="https://github.com/your-id"
                     target="_blank"
@@ -139,7 +153,7 @@ function HeroSection() {
 function AboutSection() {
     return (
         <section id="about" className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight">About</h2>
+            <h2 className="text-2xl font-semibold mb-4 tracking-tight leading-tight">About</h2>
             <p className="text-gray-700 leading-relaxed">
                 작은 문제를 반복해서 마주치며, 개선의 실마리를 찾는 개발자입니다.
                 <br />
@@ -153,23 +167,47 @@ function AboutSection() {
 function EducationSection() {
     return (
         <section className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight">Education</h2>
-            <p className="text-gray-700">
-                학력 / 자격증 / 교육 내용
-            </p>
+            <h2 className="text-2xl font-semibold mb-4 tracking-tight leading-tight">Education</h2>
+
+            <div className="bg-white border border-gray-200 rounded-xl p-5">
+                <p className="font-semibold text-lg">학력 / 교육</p>
+                <p className="text-sm text-gray-400 mt-1">YYYY ~ YYYY</p>
+
+                <p className="text-gray-700 mt-3">
+                    전공, 교육 과정, 또는 자격증 내용을 작성하세요.
+                </p>
+            </div>
         </section>
     );
 }
 
 function SkillsSection() {
+    const skills = {
+        Backend: ["Java", "Spring MVC"],
+        Database: ["PostgreSQL"],
+        Infra: ["AWS RDS", "S3", "CloudWatch"],
+        Frontend: ["Next.js", "jQuery", "Tailwind"],
+    };
+
     return (
         <section id="skills" className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight">Skills</h2>
-            <div className="flex flex-wrap gap-2">
-                {["Java", "Spring", "PostgreSQL", "AWS", "Next.js"].map((skill) => (
-                    <span key={skill} className="text-sm bg-gray-100 px-3 py-1 rounded">
-                        {skill}
-                    </span>
+            <h2 className="text-2xl font-semibold mb-6 tracking-tight leading-tight">Skills</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {Object.entries(skills).map(([category, items]) => (
+                    <div key={category} className="bg-white border border-gray-200 rounded-xl p-5">
+                        <p className="text-sm font-semibold text-gray-500 mb-3">{category}</p>
+                        <div className="flex flex-wrap gap-2">
+                            {items.map((skill) => (
+                                <span
+                                    key={skill}
+                                    className="text-sm bg-gray-100 px-3 py-1 rounded"
+                                >
+                                    {skill}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
                 ))}
             </div>
         </section>
@@ -179,7 +217,7 @@ function SkillsSection() {
 function CareerSection() {
     return (
         <section id="career" className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight">Career</h2>
+            <h2 className="text-2xl font-semibold mb-4 tracking-tight leading-tight">Career</h2>
             <div>
                 <p className="font-semibold text-lg">(주)엑시온그룹</p>
                 <p className="text-sm text-gray-400">2022.10 ~ 2025.05</p>
@@ -196,7 +234,7 @@ function CareerSection() {
 function ContactSection() {
     return (
         <section id="contact" className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight">Contact</h2>
+            <h2 className="text-2xl font-semibold mb-4 tracking-tight leading-tight">Contact</h2>
             <p className="text-gray-700">your@email.com</p>
         </section>
     );
@@ -204,6 +242,31 @@ function ContactSection() {
 
 export default function Home() {
     const [openId, setOpenId] = useState<string | null>(null);
+    const [activeSection, setActiveSection] = useState<string>("about");
+
+    useEffect(() => {
+        const sections = ["about", "skills", "career", "projects", "contact"];
+
+        const handleScroll = () => {
+            const scrollY = window.scrollY;
+
+            for (const id of sections) {
+                const el = document.getElementById(id);
+                if (!el) continue;
+
+                const offsetTop = el.offsetTop - 100;
+                const offsetHeight = el.offsetHeight;
+
+                if (scrollY >= offsetTop && scrollY < offsetTop + offsetHeight) {
+                    setActiveSection(id);
+                    break;
+                }
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const projects = [
         {
@@ -323,18 +386,43 @@ export default function Home() {
                 <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
                     <p className="font-semibold">Danistory</p>
 
-                    <nav className="space-x-6 text-sm text-gray-500 [&>*]:hover:text-black transition">
-                        <a href="#about">About</a>
-                        <a href="#skills">Skills</a>
-                        <a href="#career">Career</a>
-                        <a href="#projects">Projects</a>
-                        <a href="#contact">Contact</a>
+                    <nav className="space-x-6 text-sm text-gray-500 [&>*]:hover:text-black transition [&>a]:transition-colors">
+                        <a
+                            href="#about"
+                            className={`hover:text-black ${activeSection === "about" ? "text-black font-semibold" : ""}`}
+                        >
+                            About
+                        </a>
+                        <a
+                            href="#skills"
+                            className={`hover:text-black ${activeSection === "skills" ? "text-black font-semibold" : ""}`}
+                        >
+                            Skills
+                        </a>
+                        <a
+                            href="#career"
+                            className={`hover:text-black ${activeSection === "career" ? "text-black font-semibold" : ""}`}
+                        >
+                            Career
+                        </a>
+                        <a
+                            href="#projects"
+                            className={`hover:text-black ${activeSection === "projects" ? "text-black font-semibold" : ""}`}
+                        >
+                            Projects
+                        </a>
+                        <a
+                            href="#contact"
+                            className={`hover:text-black ${activeSection === "contact" ? "text-black font-semibold" : ""}`}
+                        >
+                            Contact
+                        </a>
                         <Link href="/guestbook">Guestbook</Link>
                     </nav>
                 </div>
             </header>
-            <main className="min-h-screen bg-gray-50 text-gray-900 px-6 py-16">
-                <div className="max-w-4xl mx-auto space-y-20">
+            <main className="min-h-screen bg-gray-50 text-gray-900 px-6 py-16 scroll-smooth">
+                <div className="max-w-4xl mx-auto space-y-24">
 
                     <HeroSection />
                     <AboutSection />
