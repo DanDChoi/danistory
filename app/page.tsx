@@ -1,244 +1,13 @@
 "use client";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
-function ProjectsSection({
-    projects,
-    openId,
-    setOpenId,
-}: {
-    projects: any[];
-    openId: string | null;
-    setOpenId: (id: string | null) => void;
-}) {
-    return (
-        <section id="projects" className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight leading-tight">Projects</h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {projects.map((item) => (
-                    <div
-                        key={item.id}
-                        className="border border-gray-200 p-6 rounded-2xl cursor-pointer hover:shadow-lg hover:border-gray-300 transition bg-white hover:-translate-y-1"
-                        onClick={() =>
-                            setOpenId(openId === item.id ? null : item.id)
-                        }
-                    >
-                        <div className="flex justify-between items-center">
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-gray-100 rounded flex items-center justify-center">
-                                    💻
-                                </div>
-                                <div>
-                                    <p className="font-semibold text-lg">{item.title}</p>
-                                    <p className="text-sm text-gray-400">{item.period}</p>
-                                </div>
-                            </div>
-                            <span
-                                className={`text-gray-400 transition-transform duration-300 ${
-                                    openId === item.id ? "rotate-180" : ""
-                                }`}
-                            >
-                                ▼
-                            </span>
-                        </div>
-
-                        <p className="text-sm text-gray-600 mt-3 leading-relaxed">
-                            {item.summary}
-                        </p>
-
-                        <div className="flex flex-wrap gap-2 mt-3">
-                            {item.tech.map((t: string) => (
-                                <span
-                                    key={t}
-                                    className="text-xs bg-gray-100 px-2 py-1 rounded"
-                                >
-                                    {t}
-                                </span>
-                            ))}
-                        </div>
-
-                        <div
-                            className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                                openId === item.id ? "max-h-[600px] mt-5 pt-5 border-t" : "max-h-0"
-                            } text-sm text-gray-700 space-y-5 leading-relaxed`}
-                        >
-                            {openId === item.id && (
-                                <>
-                                    <div>
-                                        <p className="font-semibold text-blue-500">성과</p>
-                                        {item.detail.result.map((d: string, idx: number) => (
-                                            <p
-                                                key={idx}
-                                                className="pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-gray-400"
-                                            >
-                                                {d}
-                                            </p>
-                                        ))}
-                                    </div>
-
-                                    <div>
-                                        <p className="font-semibold text-blue-500">역할</p>
-                                        {item.detail.role.map((d: string, idx: number) => (
-                                            <p
-                                                key={idx}
-                                                className="pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-gray-400"
-                                            >
-                                                {d}
-                                            </p>
-                                        ))}
-                                    </div>
-
-                                    <div>
-                                        <p className="font-semibold text-blue-500">기술</p>
-                                        {item.detail.techDetail.map((d: string, idx: number) => (
-                                            <p
-                                                key={idx}
-                                                className="pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-gray-400"
-                                            >
-                                                {d}
-                                            </p>
-                                        ))}
-                                    </div>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </section>
-    );
-}
-
-function HeroSection() {
-    return (
-        <section className="space-y-8 pt-6">
-            <Image
-                src="/profile.jpg"
-                alt="profile"
-                width={120}
-                height={120}
-                className="rounded-full"
-            />
-
-            <div className="space-y-2">
-                <h1 className="text-5xl font-bold tracking-tight">Dan</h1>
-                <p className="text-lg text-gray-500">
-                    기록하고 개선하는 백엔드 개발자
-                </p>
-                <p className="text-sm text-gray-400">
-                    Danistory — 기록하고 성장하는 개발 여정
-                </p>
-            </div>
-            <div className="flex gap-3 pt-2 flex-wrap">
-                <a
-                    href="https://github.com/your-id"
-                    target="_blank"
-                    className="px-4 py-2 bg-black text-white text-sm rounded hover:bg-gray-800"
-                >
-                    GitHub
-                </a>
-                <a
-                    href="mailto:your@email.com"
-                    className="px-4 py-2 border text-sm rounded hover:bg-gray-100"
-                >
-                    Email
-                </a>
-            </div>
-        </section>
-    );
-}
-
-function AboutSection() {
-    return (
-        <section id="about" className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight leading-tight">About</h2>
-            <p className="text-gray-700 leading-relaxed">
-                작은 문제를 반복해서 마주치며, 개선의 실마리를 찾는 개발자입니다.
-                <br />
-                쇼핑몰 플랫폼을 운영하며 사용자 흐름 전반을 안정적으로 관리해왔고,
-                더 나은 경험을 설계하는 데 집중했습니다.
-            </p>
-        </section>
-    );
-}
-
-function EducationSection() {
-    return (
-        <section className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight leading-tight">Education</h2>
-
-            <div className="bg-white border border-gray-200 rounded-xl p-5">
-                <p className="font-semibold text-lg">학력 / 교육</p>
-                <p className="text-sm text-gray-400 mt-1">YYYY ~ YYYY</p>
-
-                <p className="text-gray-700 mt-3">
-                    전공, 교육 과정, 또는 자격증 내용을 작성하세요.
-                </p>
-            </div>
-        </section>
-    );
-}
-
-function SkillsSection() {
-    const skills = {
-        Backend: ["Java", "Spring MVC"],
-        Database: ["PostgreSQL"],
-        Infra: ["AWS RDS", "S3", "CloudWatch"],
-        Frontend: ["Next.js", "jQuery", "Tailwind"],
-    };
-
-    return (
-        <section id="skills" className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-6 tracking-tight leading-tight">Skills</h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {Object.entries(skills).map(([category, items]) => (
-                    <div key={category} className="bg-white border border-gray-200 rounded-xl p-5">
-                        <p className="text-sm font-semibold text-gray-500 mb-3">{category}</p>
-                        <div className="flex flex-wrap gap-2">
-                            {items.map((skill) => (
-                                <span
-                                    key={skill}
-                                    className="text-sm bg-gray-100 px-3 py-1 rounded"
-                                >
-                                    {skill}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </section>
-    );
-}
-
-function CareerSection() {
-    return (
-        <section id="career" className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight leading-tight">Career</h2>
-            <div>
-                <p className="font-semibold text-lg">(주)엑시온그룹</p>
-                <p className="text-sm text-gray-400">2022.10 ~ 2025.05</p>
-                <ul className="list-disc ml-5 text-gray-700 mt-3 space-y-1">
-                    <li>이커머스 플랫폼 WIZWID 운영</li>
-                    <li>주문/결제/상품 전시 흐름 개선</li>
-                    <li>PostgreSQL 쿼리 튜닝 및 성능 개선</li>
-                </ul>
-            </div>
-        </section>
-    );
-}
-
-function ContactSection() {
-    return (
-        <section id="contact" className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight leading-tight">Contact</h2>
-            <p className="text-gray-700">your@email.com</p>
-        </section>
-    );
-}
+import HeroSection from "@/components/sections/HeroSection";
+import AboutSection from "@/components/sections/AboutSection";
+import CareerSection from "@/components/sections/CareerSection";
+import ContactSection from "@/components/sections/ContactSection";
+import EducationSection from "@/components/sections/EducationSection";
+import ProjectsSection from "@/components/sections/ProjectsSection";
+import SkillsSection from "@/components/sections/SkillsSection";
 
 export default function Home() {
     const [openId, setOpenId] = useState<string | null>(null);
@@ -426,18 +195,15 @@ export default function Home() {
 
                     <HeroSection />
                     <AboutSection />
-                    <EducationSection />
                     <SkillsSection />
                     <CareerSection />
-
                     <ProjectsSection
                         projects={projects}
                         openId={openId}
                         setOpenId={setOpenId}
                     />
-
+                    <EducationSection />
                     <ContactSection />
-
                 </div>
             </main>
         </>
