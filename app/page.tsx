@@ -12,6 +12,7 @@ import SkillsSection from "@/components/sections/SkillsSection";
 export default function Home() {
     const [openId, setOpenId] = useState<string | null>(null);
     const [activeSection, setActiveSection] = useState<string>("about");
+    const [visibleSections, setVisibleSections] = useState<string[]>([]);
 
     useEffect(() => {
         const sections = ["about", "skills", "career", "projects", "contact"];
@@ -35,6 +36,28 @@ export default function Home() {
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => {
+      const ids = ["hero","about","skills","career","projects","education","contact"];
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setVisibleSections((prev) => [...new Set([...prev, entry.target.id])]);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      ids.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+
+      return () => observer.disconnect();
     }, []);
 
     const projects = [
@@ -151,59 +174,101 @@ export default function Home() {
 
     return (
         <>
-            <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b">
-                <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-                    <p className="font-semibold">Danistory</p>
+            <header className="sticky top-0 z-50 bg-white border-b">
+              <div className="max-w-5xl mx-auto px-6 py-3 flex justify-between items-center">
+                <p className="font-semibold text-blue-600">Dan</p>
 
-                    <nav className="space-x-6 text-sm text-gray-500 [&>*]:hover:text-black transition [&>a]:transition-colors">
-                        <a
-                            href="#about"
-                            className={`hover:text-black ${activeSection === "about" ? "text-black font-semibold" : ""}`}
-                        >
-                            About
-                        </a>
-                        <a
-                            href="#skills"
-                            className={`hover:text-black ${activeSection === "skills" ? "text-black font-semibold" : ""}`}
-                        >
-                            Skills
-                        </a>
-                        <a
-                            href="#career"
-                            className={`hover:text-black ${activeSection === "career" ? "text-black font-semibold" : ""}`}
-                        >
-                            Career
-                        </a>
-                        <a
-                            href="#projects"
-                            className={`hover:text-black ${activeSection === "projects" ? "text-black font-semibold" : ""}`}
-                        >
-                            Projects
-                        </a>
-                        <a
-                            href="#contact"
-                            className={`hover:text-black ${activeSection === "contact" ? "text-black font-semibold" : ""}`}
-                        >
-                            Contact
-                        </a>
-                        <Link href="/guestbook">Guestbook</Link>
-                    </nav>
-                </div>
+                <nav className="flex items-center gap-6 text-sm text-gray-500">
+                  <a
+                    href="#about"
+                    className={`relative pb-1 hover:text-black transition ${activeSection === "about" ? "text-black font-semibold after:scale-x-100" : "after:scale-x-0"} after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-600 after:origin-left after:scale-x-0 after:transition-transform after:duration-300`}
+                  >
+                    About
+                  </a>
+                  <a
+                    href="#skills"
+                    className={`relative pb-1 hover:text-black transition ${activeSection === "skills" ? "text-black font-semibold after:scale-x-100" : "after:scale-x-0"} after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-600 after:origin-left after:scale-x-0 after:transition-transform after:duration-300`}
+                  >
+                    Skills
+                  </a>
+                  <a
+                    href="#career"
+                    className={`relative pb-1 hover:text-black transition ${activeSection === "career" ? "text-black font-semibold after:scale-x-100" : "after:scale-x-0"} after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-600 after:origin-left after:scale-x-0 after:transition-transform after:duration-300`}
+                  >
+                    Career
+                  </a>
+                  <a
+                    href="#projects"
+                    className={`relative pb-1 hover:text-black transition ${activeSection === "projects" ? "text-black font-semibold after:scale-x-100" : "after:scale-x-0"} after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-600 after:origin-left after:scale-x-0 after:transition-transform after:duration-300`}
+                  >
+                    Projects
+                  </a>
+                  <a
+                    href="#contact"
+                    className={`relative pb-1 hover:text-black transition ${activeSection === "contact" ? "text-black font-semibold after:scale-x-100" : "after:scale-x-0"} after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-600 after:origin-left after:scale-x-0 after:transition-transform after:duration-300`}
+                  >
+                    Contact
+                  </a>
+                  <Link href="/guestbook">Guestbook</Link>
+
+                  <a
+                    href="/resume.pdf"
+                    className="ml-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition"
+                  >
+                    이력서
+                  </a>
+                </nav>
+              </div>
             </header>
-            <main className="min-h-screen bg-gray-50 text-gray-900 px-6 py-16 scroll-smooth">
+            <main className="min-h-screen bg-white text-gray-900 px-6 py-8 scroll-smooth [scroll-behavior:smooth]">
                 <div className="max-w-4xl mx-auto space-y-24">
 
-                    <HeroSection />
-                    <AboutSection />
-                    <SkillsSection />
-                    <CareerSection />
-                    <ProjectsSection
+                    <div
+                      id="hero"
+                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                    >
+                      <HeroSection />
+                    </div>
+                    <div
+                      id="about"
+                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("about") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                    >
+                      <AboutSection />
+                    </div>
+                    <div
+                      id="skills"
+                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("skills") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                    >
+                      <SkillsSection />
+                    </div>
+                    <div
+                      id="career"
+                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("career") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                    >
+                      <CareerSection />
+                    </div>
+                    <div
+                      id="projects"
+                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("projects") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                    >
+                      <ProjectsSection
                         projects={projects}
                         openId={openId}
                         setOpenId={setOpenId}
-                    />
-                    <EducationSection />
-                    <ContactSection />
+                      />
+                    </div>
+                    <div
+                      id="education"
+                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("education") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                    >
+                      <EducationSection />
+                    </div>
+                    <div
+                      id="contact"
+                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("contact") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                    >
+                      <ContactSection />
+                    </div>
                 </div>
             </main>
         </>

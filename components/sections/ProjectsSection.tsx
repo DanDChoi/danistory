@@ -8,26 +8,26 @@ export default function ProjectsSection({
     setOpenId: (id: string | null) => void;
 }) {
     return (
-        <section id="projects" className="border-t pt-10">
-            <h2 className="text-2xl font-semibold mb-4 tracking-tight leading-tight">Projects</h2>
+        <section id="projects" className="py-16 md:py-20">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12">Projects</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {projects.map((item) => (
                     <div
                         key={item.id}
-                        className="border border-gray-200 p-6 rounded-2xl cursor-pointer hover:shadow-lg hover:border-gray-300 transition bg-white hover:-translate-y-1"
+                        className="bg-white border border-gray-200/70 rounded-xl p-7 cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                         onClick={() =>
                             setOpenId(openId === item.id ? null : item.id)
                         }
                     >
                         <div className="flex justify-between items-center">
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-gray-100 rounded flex items-center justify-center">
+                                <div className="w-10 h-10 bg-blue-50/70 rounded-lg flex items-center justify-center text-blue-600">
                                     💻
                                 </div>
                                 <div>
-                                    <p className="font-semibold text-lg">{item.title}</p>
-                                    <p className="text-sm text-gray-400">{item.period}</p>
+                                    <p className="font-bold text-gray-900">{item.title}</p>
+                                    <p className="text-sm text-gray-500">{item.period}</p>
                                 </div>
                             </div>
                             <span
@@ -39,7 +39,7 @@ export default function ProjectsSection({
                             </span>
                         </div>
 
-                        <p className="text-sm text-gray-600 mt-3 leading-relaxed">
+                        <p className="text-sm text-gray-600 mt-4 leading-relaxed">
                             {item.summary}
                         </p>
 
@@ -47,7 +47,7 @@ export default function ProjectsSection({
                             {item.tech.map((t: string) => (
                                 <span
                                     key={t}
-                                    className="text-xs bg-gray-100 px-2 py-1 rounded"
+                                    className="text-xs bg-blue-50 text-blue-600 px-3 py-1 rounded-full"
                                 >
                                     {t}
                                 </span>
@@ -56,17 +56,17 @@ export default function ProjectsSection({
 
                         <div
                             className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                                openId === item.id ? "max-h-[600px] mt-5 pt-5 border-t" : "max-h-0"
+                                openId === item.id ? "max-h-[600px] mt-6 pt-6 border-t border-gray-200/70" : "max-h-0"
                             } text-sm text-gray-700 space-y-5 leading-relaxed`}
                         >
                             {openId === item.id && (
                                 <>
                                     <div>
-                                        <p className="font-semibold text-blue-500">성과</p>
+                                        <p className="text-xs font-semibold text-blue-600 mb-2">성과</p>
                                         {item.detail.result.map((d: string, idx: number) => (
                                             <p
                                                 key={idx}
-                                                className="pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-gray-400"
+                                                className="pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-gray-300 leading-relaxed"
                                             >
                                                 {d}
                                             </p>
@@ -74,11 +74,11 @@ export default function ProjectsSection({
                                     </div>
 
                                     <div>
-                                        <p className="font-semibold text-blue-500">역할</p>
+                                        <p className="text-xs font-semibold text-blue-600 mb-2">역할</p>
                                         {item.detail.role.map((d: string, idx: number) => (
                                             <p
                                                 key={idx}
-                                                className="pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-gray-400"
+                                                className="pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-gray-300 leading-relaxed"
                                             >
                                                 {d}
                                             </p>
@@ -86,11 +86,11 @@ export default function ProjectsSection({
                                     </div>
 
                                     <div>
-                                        <p className="font-semibold text-blue-500">기술</p>
+                                        <p className="text-xs font-semibold text-blue-600 mb-2">기술</p>
                                         {item.detail.techDetail.map((d: string, idx: number) => (
                                             <p
                                                 key={idx}
-                                                className="pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-gray-400"
+                                                className="pl-4 relative before:content-['•'] before:absolute before:left-0 before:text-gray-300 leading-relaxed"
                                             >
                                                 {d}
                                             </p>
