@@ -34,7 +34,7 @@ export default function SkillsSection() {
 
   return (
     <section id="skills" className="py-18 md:py-24">
-      <div className="max-w-5xl mx-auto px-6">
+      <div className="max-w-5xl mx-auto px-4 md:px-6">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12">Skills</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
           {skillCategories.map((cat) => (
