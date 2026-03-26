@@ -8,6 +8,7 @@ import ContactSection from "@/components/sections/ContactSection";
 import EducationSection from "@/components/sections/EducationSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import SkillsSection from "@/components/sections/SkillsSection";
+import Header from "@/components/common/Header";
 
 export default function Home() {
     const [openId, setOpenId] = useState<string | null>(null);
@@ -174,82 +175,37 @@ export default function Home() {
 
     return (
         <>
-            <header className="sticky top-0 z-50 bg-white border-b">
-              <div className="max-w-5xl mx-auto px-6 py-3 flex justify-between items-center">
-                <p className="font-semibold text-blue-600">Dan</p>
-
-                <nav className="flex items-center gap-6 text-sm text-gray-500">
-                  <a
-                    href="#about"
-                    className={`relative pb-1 hover:text-black transition ${activeSection === "about" ? "text-black font-semibold after:scale-x-100" : "after:scale-x-0"} after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-600 after:origin-left after:scale-x-0 after:transition-transform after:duration-300`}
-                  >
-                    About
-                  </a>
-                  <a
-                    href="#skills"
-                    className={`relative pb-1 hover:text-black transition ${activeSection === "skills" ? "text-black font-semibold after:scale-x-100" : "after:scale-x-0"} after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-600 after:origin-left after:scale-x-0 after:transition-transform after:duration-300`}
-                  >
-                    Skills
-                  </a>
-                  <a
-                    href="#career"
-                    className={`relative pb-1 hover:text-black transition ${activeSection === "career" ? "text-black font-semibold after:scale-x-100" : "after:scale-x-0"} after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-600 after:origin-left after:scale-x-0 after:transition-transform after:duration-300`}
-                  >
-                    Career
-                  </a>
-                  <a
-                    href="#projects"
-                    className={`relative pb-1 hover:text-black transition ${activeSection === "projects" ? "text-black font-semibold after:scale-x-100" : "after:scale-x-0"} after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-600 after:origin-left after:scale-x-0 after:transition-transform after:duration-300`}
-                  >
-                    Projects
-                  </a>
-                  <a
-                    href="#contact"
-                    className={`relative pb-1 hover:text-black transition ${activeSection === "contact" ? "text-black font-semibold after:scale-x-100" : "after:scale-x-0"} after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-full after:bg-blue-600 after:origin-left after:scale-x-0 after:transition-transform after:duration-300`}
-                  >
-                    Contact
-                  </a>
-                  <Link href="/guestbook">Guestbook</Link>
-
-                  <a
-                    href="/resume.pdf"
-                    className="ml-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition"
-                  >
-                    이력서
-                  </a>
-                </nav>
-              </div>
-            </header>
-            <main className="min-h-screen bg-white text-gray-900 px-6 py-8 scroll-smooth [scroll-behavior:smooth]">
-                <div className="max-w-4xl mx-auto space-y-24">
+            <Header activeSection={activeSection} />
+            <main className="min-h-screen bg-white text-gray-900 px-4 md:px-6 py-6 md:py-8 scroll-smooth [scroll-behavior:smooth]">
+                <div className="max-w-4xl mx-auto space-y-16 md:space-y-24">
 
                     <div
                       id="hero"
-                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                      className={`scroll-mt-20 transition-all duration-700 ease-out ${visibleSections.includes("hero") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                     >
                       <HeroSection />
                     </div>
                     <div
                       id="about"
-                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("about") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                      className={`scroll-mt-20 transition-all duration-700 ease-out ${visibleSections.includes("about") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                     >
                       <AboutSection />
                     </div>
                     <div
                       id="skills"
-                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("skills") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                      className={`scroll-mt-20 transition-all duration-700 ease-out ${visibleSections.includes("skills") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                     >
                       <SkillsSection />
                     </div>
                     <div
                       id="career"
-                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("career") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                      className={`scroll-mt-20 transition-all duration-700 ease-out ${visibleSections.includes("career") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                     >
                       <CareerSection />
                     </div>
                     <div
                       id="projects"
-                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("projects") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                      className={`scroll-mt-20 transition-all duration-700 ease-out ${visibleSections.includes("projects") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                     >
                       <ProjectsSection
                         projects={projects}
@@ -259,13 +215,13 @@ export default function Home() {
                     </div>
                     <div
                       id="education"
-                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("education") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                      className={`scroll-mt-20 transition-all duration-700 ease-out ${visibleSections.includes("education") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                     >
                       <EducationSection />
                     </div>
                     <div
                       id="contact"
-                      className={`scroll-mt-24 transition-all duration-700 ease-out ${visibleSections.includes("contact") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+                      className={`scroll-mt-20 transition-all duration-700 ease-out ${visibleSections.includes("contact") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
                     >
                       <ContactSection />
                     </div>

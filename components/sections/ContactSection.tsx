@@ -33,11 +33,11 @@ export default function ContactSection() {
                         <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 transition group-hover:scale-110">
                             📱
                         </div>
-                        <p className="text-sm text-gray-400 mb-2">Contact</p>
+                        <p className="text-sm text-gray-400 mb-2">Phone</p>
 
                         <div className="flex justify-center">
                             <Image
-                                src="/img/contact_qr.PNG"
+                                src="/img/contact_qr.png"
                                 alt="contact_qr"
                                 width={80}
                                 height={80}
@@ -62,16 +62,16 @@ export default function ContactSection() {
                     </div>
                 </div>
 
-                {/* 버튼 */}
-                <div>
-                    <a
-                        href="/resume.pdf"
-                        download
-                        className="inline-block bg-primary text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg active:scale-95 transition"
-                    >
-                        이력서 다운로드
-                    </a>
-                </div>
+                {/* 이력서 버튼 */}
+                {/*<div>*/}
+                {/*    <a*/}
+                {/*        href="/resume.zip"*/}
+                {/*        className="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"*/}
+                {/*        download="Dan_Choi_Resume_Portfolio.zip"*/}
+                {/*    >*/}
+                {/*        이력서 다운로드*/}
+                {/*    </a>*/}
+                {/*</div>*/}
             </div>
         </section>
     );
