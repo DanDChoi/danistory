@@ -1,7 +1,9 @@
+import { Server, Layout, Cloud } from "lucide-react";
+
 export default function SkillsSection() {
   const skillCategories = [
     {
-      icon: "🖥️",
+      icon: Server,
       title: "Back-End",
       items: [
         { name: "Java / Spring MVC", desc: "이커머스 플랫폼 전반의 주문·결제 로직 및 API 개발" },
@@ -11,7 +13,7 @@ export default function SkillsSection() {
       ],
     },
     {
-      icon: "🧩",
+      icon: Layout,
       title: "Front-End",
       items: [
         { name: "HTML / CSS / JSTL", desc: "관리자 화면 구성 및 유지보수 중심의 UI 설계" },
@@ -20,7 +22,7 @@ export default function SkillsSection() {
       ],
     },
     {
-      icon: "☁️",
+      icon: Cloud,
       title: "DevOps",
       items: [
         { name: "AWS EC2 / RDS", desc: "운영 환경에서 EC2 기반 WAS와 RDS PostgreSQL 운용" },
@@ -40,12 +42,12 @@ export default function SkillsSection() {
           {skillCategories.map((cat) => (
             <div
               key={cat.title}
-              className="bg-white border border-gray-200/70 rounded-xl p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              className="group bg-white border border-gray-200/70 rounded-xl p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
               {/* Header */}
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-lg bg-blue-50/70 flex items-center justify-center text-blue-600">
-                  <span className="text-lg">{cat.icon}</span>
+                  <cat.icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900">{cat.title}</h3>
               </div>

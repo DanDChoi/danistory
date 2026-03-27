@@ -1,3 +1,5 @@
+import { Briefcase, Award, Globe } from "lucide-react";
+
 export default function AboutSection() {
   return (
     <section id="about" className="py-16 md:py-20">
@@ -12,7 +14,7 @@ export default function AboutSection() {
           {/* Card 1 */}
           <div className="bg-white border border-gray-200/70 rounded-xl p-4 md:p-7 text-center shadow-sm hover:shadow-md active:scale-[0.98] transition-all duration-300">
             <div className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 md:mb-4 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 text-base md:text-lg">
-              💼
+              <Briefcase className="w-5 h-5 md:w-6 md:h-6" />
             </div>
             <h3 className="text-base md:text-lg font-bold text-gray-900 mt-1">2년 7개월</h3>
             <p className="text-xs md:text-sm text-gray-500 mt-1">WIZWID 이커머스 플랫폼 운영</p>
@@ -21,7 +23,7 @@ export default function AboutSection() {
           {/* Card 2 */}
           <div className="bg-white border border-gray-200/70 rounded-xl p-4 md:p-7 text-center shadow-sm hover:shadow-md active:scale-[0.98] transition-all duration-300">
             <div className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 md:mb-4 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 text-base md:text-lg">
-              🏆
+              <Award className="w-5 h-5 md:w-6 md:h-6" />
             </div>
             <h3 className="text-base md:text-lg font-bold text-gray-900 mt-1">2023 우수사원</h3>
             <p className="text-xs md:text-sm text-gray-500 mt-1">성과 기반 문제해결 역량 인정</p>
@@ -30,7 +32,7 @@ export default function AboutSection() {
           {/* Card 3 */}
           <div className="bg-white border border-gray-200/70 rounded-xl p-4 md:p-7 text-center shadow-sm hover:shadow-md active:scale-[0.98] transition-all duration-300">
             <div className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 md:mb-4 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 text-base md:text-lg">
-              🌏
+              <Globe className="w-5 h-5 md:w-6 md:h-6" />
             </div>
             <h3 className="text-base md:text-lg font-bold text-gray-900 mt-1">호주 5년 거주</h3>
             <p className="text-xs md:text-sm text-gray-500 mt-1">영어 일상 회화 가능</p>
