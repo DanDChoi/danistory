@@ -17,7 +17,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="min-h-[80vh] flex items-center pt-10 md:pt-16 bg-white">
+    <section id="hero" className="min-h-[80vh] flex items-center pt-10 md:pt-16 bg-white">
       <div className="max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-24">
         <div className="flex flex-col md:flex-row items-center gap-6 md:gap-16">
           {/* Profile Image */}
