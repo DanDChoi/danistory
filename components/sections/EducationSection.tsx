@@ -1,3 +1,5 @@
+import { GraduationCap, Award } from "lucide-react";
+
 export default function EducationSection() {
     return (
         <section id="education" className="py-12 md:py-20">
@@ -5,10 +7,10 @@ export default function EducationSection() {
                 <h2 className="text-2xl md:text-3xl font-bold mb-8 md:mb-10">Education</h2>
 
                 {/* 교육 1 */}
-                <div className="bg-white border border-gray-200/70 rounded-xl p-4 md:p-6 mb-4 md:mb-6 flex flex-col md:flex-row gap-4 hover:shadow-md active:scale-[0.98] transition">
+                <div className="group bg-white border border-gray-200/70 rounded-xl p-4 md:p-6 mb-4 md:mb-6 flex flex-col md:flex-row gap-4 hover:shadow-md active:scale-[0.98] transition">
                     {/* 아이콘 영역 */}
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary text-sm md:text-base">
-                        🎓
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-teal-50 group-hover:bg-teal-100 flex items-center justify-center flex-shrink-0 text-teal-600 transition-colors duration-300">
+                        <GraduationCap className="w-4 h-4 md:w-5 md:h-5 text-teal-600" />
                     </div>
 
                     {/* 내용 */}
@@ -26,7 +28,7 @@ export default function EducationSection() {
                             </div>
                         </div>
 
-                        <p className="text-blue-600 font-medium mt-1 md:mt-2 text-sm md:text-base">
+                        <p className="text-blue-500 font-medium mt-1 md:mt-2 text-sm md:text-base">
                             KOSMO (한국소프트웨어인재개발원)
                         </p>
 
@@ -39,9 +41,9 @@ export default function EducationSection() {
                 </div>
 
                 {/* 교육 2 */}
-                <div className="bg-white border border-gray-200/70 rounded-xl p-4 md:p-6 flex flex-col md:flex-row gap-4 hover:shadow-md active:scale-[0.98] transition">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary text-sm md:text-base">
-                        🎓
+                <div className="group bg-white border border-gray-200/70 rounded-xl p-4 md:p-6 flex flex-col md:flex-row gap-4 hover:shadow-md active:scale-[0.98] transition">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-teal-50 group-hover:bg-teal-100 flex items-center justify-center flex-shrink-0 text-teal-600 transition-colors duration-300">
+                        <GraduationCap className="w-4 h-4 md:w-5 md:h-5 text-teal-600" />
                     </div>
 
                     <div className="flex-1">
@@ -53,7 +55,7 @@ export default function EducationSection() {
                             </div>
                         </div>
 
-                        <p className="text-blue-600 font-medium mt-1 md:mt-2 text-sm md:text-base">
+                        <p className="text-blue-500 font-medium mt-1 md:mt-2 text-sm md:text-base">
                             4년제 졸업
                         </p>
                     </div>
@@ -64,7 +66,7 @@ export default function EducationSection() {
                     <h3 className="text-base md:text-lg font-semibold mb-3 md:mb-4">자격증</h3>
 
                     <div className="inline-flex items-center gap-2 bg-muted px-3 md:px-4 py-2 rounded-lg hover:bg-primary/10 transition text-sm">
-                        <span>🏅</span>
+                        <Award className="w-4 h-4 text-teal-600" />
                         <span className="font-medium">정보처리기사</span>
                         <span className="text-sm text-gray-500">(필기합격)</span>
                     </div>

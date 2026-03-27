@@ -91,7 +91,7 @@ export default function Home() {
         },
         {
             id: "2",
-            title: "WIZpay 결제 시스템",
+            title: "자체페이(WIZpay) 개발",
             period: "2023.01 - 2023.04",
             summary: "주문서 진입 시 회원이 등록한 카드 정보를 외부 API로 실시간 조회하여 사용자 맞춤 결제 옵션 제공",
             detail: {

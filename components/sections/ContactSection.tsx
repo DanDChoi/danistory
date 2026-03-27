@@ -1,6 +1,21 @@
 import Image from "next/image";
+import { Mail, Smartphone, Copy, Check } from "lucide-react";
+import { SiGithub } from "react-icons/si";
+import { useState } from "react";
 
 export default function ContactSection() {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = async () => {
+      try {
+        await navigator.clipboard.writeText("danchoi.dev@gmail.com");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (e) {
+        console.error("copy failed", e);
+      }
+    };
+
     return (
         <section id="contact" className="py-20">
             <div className="max-w-5xl mx-auto text-center">
@@ -16,22 +31,38 @@ export default function ContactSection() {
                 <div className="grid md:grid-cols-3 gap-6 mb-12">
                     {/* Email */}
                     <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                        <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 transition group-hover:scale-110">
-                            ✉️
+                        <div className="w-12 h-12 mx-auto rounded-full bg-blue-50/70 group-hover:bg-blue-100 text-blue-800 flex items-center justify-center mb-4 transition">
+                            <Mail className="w-5 h-5 text-current transition-transform duration-300 group-hover:scale-110" />
                         </div>
                         <p className="text-sm text-gray-400 mb-2">Email</p>
-                        <a
-                            href="mailto:danchoi.dev@gmail.com"
-                            className="font-medium hover:text-primary transition"
-                        >
+                        <span className="font-medium text-gray-900">
                             danchoi.dev@gmail.com
-                        </a>
+                        </span>
+                        <br />
+                        <button
+                          onClick={handleCopy}
+                          className="mt-2 inline-flex items-center gap-1 text-xs text-gray-400 hover:text-blue-600 cursor-pointer transition px-2 py-1 rounded-md hover:bg-gray-100"
+                        >
+                          {copied ? (
+                            <>
+                              <span className="text-blue-600 flex items-center gap-1">
+                                <Check className="w-3 h-3" />
+                                복사됨
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3 h-3" />
+                              복사
+                            </>
+                          )}
+                        </button>
                     </div>
 
                     {/* QR (Phone 대체) */}
                     <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                        <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 transition group-hover:scale-110">
-                            📱
+                        <div className="w-12 h-12 mx-auto rounded-full bg-blue-50/70 group-hover:bg-blue-100 text-blue-800 flex items-center justify-center mb-4 transition">
+                            <Smartphone className="w-5 h-5 text-primary transition-transform duration-300 group-hover:scale-110" />
                         </div>
                         <p className="text-sm text-gray-400 mb-2">Phone</p>
 
@@ -48,14 +79,14 @@ export default function ContactSection() {
 
                     {/* GitHub */}
                     <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                        <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 transition group-hover:scale-110">
-                            🐙
+                        <div className="w-12 h-12 mx-auto rounded-full bg-blue-50/70 group-hover:bg-blue-100 text-blue-800 flex items-center justify-center mb-4 transition">
+                            <SiGithub className="w-5 h-5 text-primary transition-transform duration-300 group-hover:scale-110" />
                         </div>
                         <p className="text-sm text-gray-400 mb-2">GitHub</p>
                         <a
                             href="https://github.com/DanDChoi"
                             target="_blank"
-                            className="font-medium hover:text-primary transition"
+                            className="font-medium text-gray-900 hover:text-blue-600 transition-colors duration-200"
                         >
                             github.com/DanDChoi
                         </a>

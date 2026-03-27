@@ -1,8 +1,21 @@
-import { Mail, Download } from "lucide-react";
+import { Mail, Download, Copy, Check } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function HeroSection() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText("danchoi.dev@gmail.com");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (e) {
+      console.error("copy failed", e);
+    }
+  };
+
   return (
     <section className="min-h-[80vh] flex items-center pt-10 md:pt-16 bg-white">
       <div className="max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-24">
@@ -43,15 +56,20 @@ export default function HeroSection() {
 
             {/* Contact pills */}
             <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-3 mb-6 md:mb-8">
-              <a
-                href="mailto:danchoi.dev@gmail.com"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors text-sm"
-              >
-                <span className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
-                  <span>danchoi.dev@gmail.com</span>
-                </span>
-              </a>
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors text-sm">
+                <Mail className="w-4 h-4" />
+                <span>danchoi.dev@gmail.com</span>
+                <button
+                  onClick={handleCopy}
+                  className="ml-1 p-1 rounded hover:bg-gray-200 transition cursor-pointer"
+                >
+                  {copied ? (
+                    <Check className="w-4 h-4 text-blue-600" />
+                  ) : (
+                    <Copy className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
 
               <a
                 href="https://github.com/DanDChoi"

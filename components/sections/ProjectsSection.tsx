@@ -1,3 +1,5 @@
+import { Code2, CreditCard, ShoppingCart, FileText, ChevronDown } from "lucide-react";
+
 export default function ProjectsSection({
                              projects,
                              openId,
@@ -7,36 +9,71 @@ export default function ProjectsSection({
     openId: string | null;
     setOpenId: (id: string | null) => void;
 }) {
+    const iconMap: Record<string, any> = {
+      "슬로우 쿼리 개선": Code2,
+      "자체페이(WIZpay) 개발": CreditCard,
+      "MD상품평 기능 개발": ShoppingCart,
+      "BO/PO 사용성 개선": FileText,
+    };
+    const colorMap: Record<string, { bg: string; hoverBg: string; text: string; titleHover: string }> = {
+      "슬로우 쿼리 개선": {
+        bg: "bg-blue-50/70",
+        hoverBg: "group-hover:bg-blue-100",
+        text: "text-blue-600",
+        titleHover: "group-hover:text-blue-600",
+      },
+      "자체페이(WIZpay) 개발": {
+        bg: "bg-indigo-50/70",
+        hoverBg: "group-hover:bg-indigo-100",
+        text: "text-indigo-600",
+        titleHover: "group-hover:text-indigo-600",
+      },
+      "MD상품평 기능 개발": {
+        bg: "bg-purple-50/70",
+        hoverBg: "group-hover:bg-purple-100",
+        text: "text-purple-600",
+        titleHover: "group-hover:text-purple-600",
+      },
+      "BO/PO 사용성 개선": {
+        bg: "bg-sky-50/70",
+        hoverBg: "group-hover:bg-sky-100",
+        text: "text-sky-600",
+        titleHover: "group-hover:text-sky-600",
+      },
+    };
     return (
         <section id="projects" className="py-12 md:py-20">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 md:mb-12">Projects</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                {projects.map((item) => (
+                {projects.map((item) => {
+                    const c = colorMap[item.title] || { bg: "bg-blue-50/70", hoverBg: "group-hover:bg-blue-100", text: "text-blue-600", titleHover: "group-hover:text-blue-600" };
+                    return (
                     <div
                         key={item.id}
-                        className="bg-white border border-gray-200/70 rounded-xl p-4 md:p-7 cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                        className="group bg-white border border-gray-200/70 rounded-xl p-4 md:p-7 cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
                         onClick={() =>
                             setOpenId(openId === item.id ? null : item.id)
                         }
                     >
                         <div className="flex justify-between items-center">
                             <div className="flex items-center gap-2 md:gap-3">
-                                <div className="w-9 h-9 md:w-10 md:h-10 bg-blue-50/70 rounded-lg flex items-center justify-center text-blue-600">
-                                    💻
+                                <div className={`w-9 h-9 md:w-10 md:h-10 ${c.bg} ${c.hoverBg} rounded-lg flex items-center justify-center ${c.text} transition-colors duration-300`}>
+                                    {(() => {
+                                      const Icon = iconMap[item.title] || Code2;
+                                      return <Icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110 text-current" />;
+                                    })()}
                                 </div>
                                 <div>
-                                    <p className="font-bold text-gray-900">{item.title}</p>
+                                    <p className={`font-bold text-gray-900 ${c.titleHover} transition-colors duration-300`}>{item.title}</p>
                                     <p className="text-sm text-gray-500">{item.period}</p>
                                 </div>
                             </div>
-                            <span
-                                className={`text-gray-400 transition-transform duration-300 ${
+                            <ChevronDown
+                                className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${
                                     openId === item.id ? "rotate-180" : ""
                                 }`}
-                            >
-                                ▼
-                            </span>
+                            />
                         </div>
 
                         <p className="text-sm text-gray-600 mt-3 md:mt-4 leading-relaxed">
@@ -100,7 +137,7 @@ export default function ProjectsSection({
                             )}
                         </div>
                     </div>
-                ))}
+                )})}
             </div>
         </section>
     );
