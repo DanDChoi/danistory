@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+
+/*일반*/
+/*@import "highlight.js/styles/github.css";*/
+
+/*다크테마*/
+@import "highlight.js/styles/github-dark.css";
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -24,3 +31,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

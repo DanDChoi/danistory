@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/common/Header";
+import { getAllPosts } from "@/lib/blog";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,11 +24,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const posts = getAllPosts();
+  const categories = [...new Set(posts.map(p => p.category))]
+    .filter(Boolean)
+    .sort((a, b) => a.localeCompare(b));
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header categories={categories} />
         {children}
       </body>
     </html>

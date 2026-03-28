@@ -1,5 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
@@ -8,36 +7,14 @@ import ContactSection from "@/components/sections/ContactSection";
 import EducationSection from "@/components/sections/EducationSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import SkillsSection from "@/components/sections/SkillsSection";
-import Header from "@/components/common/Header";
+import SideNav from "@/components/common/SideNav";
+
+import React, { useState, useEffect } from "react";
 
 export default function Home() {
+
     const [openId, setOpenId] = useState<string | null>(null);
-    const [activeSection, setActiveSection] = useState<string>("about");
     const [visibleSections, setVisibleSections] = useState<string[]>([]);
-
-    useEffect(() => {
-        const sections = ["about", "skills", "career", "projects", "contact"];
-
-        const handleScroll = () => {
-            const scrollY = window.scrollY;
-
-            for (const id of sections) {
-                const el = document.getElementById(id);
-                if (!el) continue;
-
-                const offsetTop = el.offsetTop - 100;
-                const offsetHeight = el.offsetHeight;
-
-                if (scrollY >= offsetTop && scrollY < offsetTop + offsetHeight) {
-                    setActiveSection(id);
-                    break;
-                }
-            }
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
 
     useEffect(() => {
       const ids = ["hero","about","skills","career","projects","education","contact"];
@@ -175,7 +152,7 @@ export default function Home() {
 
     return (
         <>
-            <Header activeSection={activeSection} />
+            <SideNav />
             <main className="min-h-screen bg-white text-gray-900 px-4 md:px-6 py-6 md:py-8 scroll-smooth [scroll-behavior:smooth]">
                 <div className="max-w-4xl mx-auto space-y-16 md:space-y-24">
 
