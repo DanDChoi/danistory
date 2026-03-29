@@ -1,8 +1,8 @@
 ---
-title: react 테스트 제목
-date: 2026-03-21
-description: react 테스트 설명
-category: react
+title: jQuery 테스트 제목
+date: 2026-03-24
+description: jQuery 테스트 설명
+category: jQuery
 ---
 
 ## 안녕하세요

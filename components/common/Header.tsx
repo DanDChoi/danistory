@@ -11,9 +11,9 @@ export default function Header({ categories = [] }: { categories?: string[] }) {
   const [open, setOpen] = useState(false);
 
   return (
-      <header className="sticky top-0 z-50 bg-white border-b">
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
-          <p className="font-semibold text-blue-600">Dan</p>
+          <Link href="/" className="font-semibold text-blue-600">Dan</Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -47,7 +47,7 @@ export default function Header({ categories = [] }: { categories?: string[] }) {
                             : "text-gray-600 hover:bg-gray-100 hover:text-blue-600"
                     }`}
                 >
-                  전체
+                  <b>전체</b>
                 </Link>
 
                 {/* dynamic categories */}
