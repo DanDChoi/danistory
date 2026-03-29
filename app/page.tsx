@@ -10,11 +10,29 @@ import SkillsSection from "@/components/sections/SkillsSection";
 import SideNav from "@/components/common/SideNav";
 
 import React, { useState, useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 
 export default function Home() {
 
     const [openId, setOpenId] = useState<string | null>(null);
     const [visibleSections, setVisibleSections] = useState<string[]>([]);
+
+    useEffect(() => {
+      const getSession = async () => {
+        const { data } = await supabase.auth.getSession();
+        console.log("session init:", data);
+      };
+
+      getSession();
+
+      const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
+        console.log("auth change:", event, session);
+      });
+
+      return () => {
+        listener.subscription.unsubscribe();
+      };
+    }, []);
 
     useEffect(() => {
       const ids = ["hero","about","skills","career","projects","education","contact"];

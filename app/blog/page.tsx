@@ -1,34 +1,37 @@
 import { getAllPosts } from "@/lib/blog";
-import Link from "next/link";
+import PostGrid from "@/components/blog/PostGrid";
 
-export default function BlogPage() {
+export default async function BlogPage({ searchParams }: { searchParams?: { page?: string } }) {
     const posts = getAllPosts();
 
+    const sortedPosts = [...posts].sort((a, b) => {
+      const da = new Date(a.date).getTime();
+      const db = new Date(b.date).getTime();
+      return db - da; // newest first
+    });
+
+    const pageSize = 6;
+    const params = await searchParams;
+    const currentPage = Math.max(1, Number(params?.page || 1));
+    const totalPages = Math.max(1, Math.ceil(sortedPosts.length / pageSize));
+    const start = (currentPage - 1) * pageSize;
+    const paginatedPosts = sortedPosts.slice(start, start + pageSize);
+
     return (
-        <main className="max-w-4xl mx-auto px-4 py-16">
-            <h1 className="text-3xl font-bold mb-10">Blog</h1>
-
-            <div className="space-y-6">
-                {posts.map((post) => (
-                    <Link
-                        key={post.slug}
-                        href={`/blog/${post.category}/${post.slug}`}
-                        className="block p-6 border rounded-xl hover:shadow-md transition"
-                    >
-                        <h2 className="text-xl font-semibold">{post.title}</h2>
-
-                        <p className="text-gray-400 text-sm mt-2">
-                            {new Date(post.date).toLocaleDateString()}
-                        </p>
-
-                        {post.description && (
-                            <p className="text-gray-600 mt-3">
-                                {post.description}
-                            </p>
-                        )}
-                    </Link>
-                ))}
+        <main className="min-h-screen bg-gray-50">
+          <div className="max-w-5xl mx-auto px-4 md:px-6 py-12 md:py-16">
+            <div className="mb-12">
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Blog</h1>
+                <p className="text-gray-500 mt-2">개발 기록과 실험들을 정리합니다.</p>
             </div>
+
+            <PostGrid
+              posts={paginatedPosts}
+              currentPage={currentPage}
+              totalPages={totalPages}
+              basePath="/blog"
+            />
+          </div>
         </main>
     );
 }
