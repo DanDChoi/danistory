@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Download } from "lucide-react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Header({ categories = [] }: { categories?: string[] }) {
   const pathname = usePathname();
@@ -13,7 +14,14 @@ export default function Header({ categories = [] }: { categories?: string[] }) {
   return (
       <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
         <div className="max-w-5xl mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
-          <Link href="/" className="font-semibold text-blue-600">Dan</Link>
+          <Link href="/">
+            <Image
+                src="/img/danistory.png"
+                alt="danistory"
+                width={120}
+                height={30}
+            />
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
