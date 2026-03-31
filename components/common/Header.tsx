@@ -76,6 +76,10 @@ export default function Header({ categories = [] }: { categories?: string[] }) {
               </div>
             </div>
 
+            <Link href="/projects" className="text-gray-700 hover:text-blue-600 transition">
+              Projects
+            </Link>
+
             <Link href="/guestbook" className="text-gray-700 hover:text-blue-600 transition">
               Guestbook
             </Link>
