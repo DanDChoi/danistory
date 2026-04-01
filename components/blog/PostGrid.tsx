@@ -39,7 +39,7 @@ export default function PostGrid({
                 {posts.map((post) => (
                     <Link
                         key={post.slug}
-                        href={`${basePath}/${post.slug}`}
+                        href={basePath === "/blog" ? `/blog/${post.category}/${post.slug}` : `${basePath}/${post.slug}`}
                         className="group block bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md hover:-translate-y-1 transition-all duration-200"
                     >
                         <div className="w-full h-36 bg-gray-200 overflow-hidden">
