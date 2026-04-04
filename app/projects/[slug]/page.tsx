@@ -5,6 +5,12 @@ import { notFound } from "next/navigation";
 import { getProjectBySlug, projects } from "./projectData";
 import SlowQueryExecutionPlan from "./components/SlowQueryExecutionPlan";
 import SlowQueryChart from "./components/SlowQueryChart";
+import WizpaySequenceDiagram from "./components/WizpaySequenceDiagram";
+import WizpayPlatformFlow from "./components/WizpayPlatformFlow";
+import MdReviewS3Flow from "./components/MdReviewS3Flow";
+import MdReviewArchitecture from "./components/MdReviewArchitecture";
+import BoPoExcelFlow from "./components/BoPoExcelFlow";
+import BoPoStateDiagram from "./components/BoPoStateDiagram";
 
 /* ------------------------------------------------------------------ */
 /*  정적 경로 생성                                                        */
@@ -186,6 +192,7 @@ export default async function ProjectDetailPage({
 
                 {/* 이미지 */}
                 <div className="flex flex-col gap-4">
+                    {/*슬로우쿼리*/}
                     {project.slug === "slow-query" && (
                         <>
                             {/* 실행계획 Before/After */}
@@ -205,6 +212,71 @@ export default async function ProjectDetailPage({
                             </div>
                         </>
                     )}
+
+                    {/*WIZpay*/}
+                    {project.slug === "wizpay" && (
+                        <>
+                            {/* 결제 흐름 시퀀스 다이어그램 */}
+                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
+                                    PAYMENT FLOW — SEQUENCE DIAGRAM
+                                </p>
+                                <WizpaySequenceDiagram />
+                            </div>
+
+                            {/* 플랫폼별 분기 플로우 */}
+                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
+                                    PLATFORM BRANCH FLOW
+                                </p>
+                                <WizpayPlatformFlow />
+                            </div>
+                        </>
+                    )}
+
+                    {/*MD Review*/}
+                    {project.slug === "md-review" && (
+                        <>
+                            {/* S3 이중 버킷 처리 플로우 */}
+                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
+                                    S3 IMAGE PROCESSING FLOW
+                                </p>
+                                <MdReviewS3Flow />
+                            </div>
+
+                            {/* 시스템 아키텍처 */}
+                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
+                                    SYSTEM ARCHITECTURE
+                                </p>
+                                <MdReviewArchitecture />
+                            </div>
+                        </>
+                    )}
+
+                    {/*BO PO improvement*/}
+                    {project.slug === "bo-po-improvement" && (
+                        <>
+                            {/* 엑셀 업로드 처리 플로우 */}
+                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
+                                    EXCEL UPLOAD PROCESSING FLOW
+                                </p>
+                                <BoPoExcelFlow />
+                            </div>
+
+                            {/* 입점사 상태 전이 다이어그램 */}
+                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
+                                    VENDOR STATUS STATE DIAGRAM
+                                </p>
+                                <BoPoStateDiagram />
+                            </div>
+                        </>
+                    )}
+
+
                 </div>
 
                 {/* 상세 섹션들 */}
