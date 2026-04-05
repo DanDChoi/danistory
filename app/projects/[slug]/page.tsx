@@ -11,6 +11,10 @@ import MdReviewS3Flow from "./components/MdReviewS3Flow";
 import MdReviewArchitecture from "./components/MdReviewArchitecture";
 import BoPoExcelFlow from "./components/BoPoExcelFlow";
 import BoPoStateDiagram from "./components/BoPoStateDiagram";
+import TogatherERD from "./components/TogatherERD";
+import TogatherMVC from "./components/TogatherMVC";
+import OrderSystemERD from "./components/OrderSystemERD";
+import CovidSweepersArch from "./components/CovidSweepersArch";
 
 /* ------------------------------------------------------------------ */
 /*  정적 경로 생성                                                        */
@@ -191,7 +195,7 @@ export default async function ProjectDetailPage({
                 )}
 
                 {/* 이미지 */}
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 mb-6">
                     {/*슬로우쿼리*/}
                     {project.slug === "slow-query" && (
                         <>
@@ -276,6 +280,52 @@ export default async function ProjectDetailPage({
                         </>
                     )}
 
+                    {/*Togather*/}
+                    {project.slug === "togather" && (
+                        <>
+                            {/* Spring MVC 레이어 구조 */}
+                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
+                                    SPRING MVC LAYER ARCHITECTURE
+                                </p>
+                                <TogatherMVC />
+                            </div>
+
+                            {/* ERD */}
+                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
+                                    ENTITY RELATIONSHIP DIAGRAM
+                                </p>
+                                <TogatherERD />
+                            </div>
+                        </>
+                    )}
+
+                    {/*order-system-db*/}
+                    {project.slug === "order-system-db" && (
+                        <>
+                            {/* 배달주문 시스템 ERD */}
+                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
+                                    DELIVERY ORDER SYSTEM ERD
+                                </p>
+                                <OrderSystemERD />
+                            </div>
+                        </>
+                    )}
+
+                    {/*covid-sweepers*/}
+                    {project.slug === "covid-sweepers" && (
+                        <>
+                            {/* 멀티스레드 + 소켓 아키텍처 */}
+                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
+                                    MULTI-THREAD · SOCKET ARCHITECTURE
+                                </p>
+                                <CovidSweepersArch />
+                            </div>
+                        </>
+                    )}
 
                 </div>
 

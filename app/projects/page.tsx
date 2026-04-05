@@ -170,7 +170,7 @@ function ProjectCard({ project }: { project: Project }) {
       <Link
           href={`/projects/${project.slug}`}
           className={[
-            "group relative block bg-white rounded-2xl border border-gray-100",
+            "group relative block bg-white rounded-2xl border border-gray-100 overflow-hidden",
             "px-5 py-6 md:px-7 md:py-7",
             "transition-all duration-200",
             "hover:-translate-y-0.5 hover:border-gray-200 hover:shadow-sm",
