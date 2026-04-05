@@ -2,7 +2,7 @@
 
 export default function BoPoStateDiagram() {
   return (
-    <svg width="100%" viewBox="0 0 680 340" className="w-full">
+    <svg width="100%" viewBox="0 0 680 370" className="w-full">
       <defs>
         <marker id="arr-st" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -86,14 +86,14 @@ export default function BoPoStateDiagram() {
       <line x1="353" y1="296" x2="353" y2="304" stroke="#444441" strokeWidth="1.5" markerEnd="url(#arr-st)"/>
 
       {/* 범례 */}
-      <rect x="80"  y="314" width="10" height="10" rx="2" fill="#FAEEDA" stroke="#BA7517" strokeWidth="0.5"/>
-      <text x="96"  y="319" dominantBaseline="central" fontSize="10" fill="#888780">진행 중</text>
-      <rect x="170" y="314" width="10" height="10" rx="2" fill="#E1F5EE" stroke="#1D9E75" strokeWidth="0.5"/>
-      <text x="186" y="319" dominantBaseline="central" fontSize="10" fill="#888780">정상 운영</text>
-      <rect x="270" y="314" width="10" height="10" rx="2" fill="#FCEBEB" stroke="#E24B4A" strokeWidth="0.5"/>
-      <text x="286" y="319" dominantBaseline="central" fontSize="10" fill="#888780">종료 / 반려</text>
-      <rect x="370" y="314" width="10" height="10" rx="2" fill="#F1EFE8" stroke="#B4B2A9" strokeWidth="0.5"/>
-      <text x="386" y="319" dominantBaseline="central" fontSize="10" fill="#888780">처리 중</text>
+      <rect x="80"  y="344" width="10" height="10" rx="2" fill="#FAEEDA" stroke="#BA7517" strokeWidth="0.5"/>
+      <text x="96"  y="349" dominantBaseline="central" fontSize="10" fill="#888780">진행 중</text>
+      <rect x="170" y="344" width="10" height="10" rx="2" fill="#E1F5EE" stroke="#1D9E75" strokeWidth="0.5"/>
+      <text x="186" y="349" dominantBaseline="central" fontSize="10" fill="#888780">정상 운영</text>
+      <rect x="270" y="344" width="10" height="10" rx="2" fill="#FCEBEB" stroke="#E24B4A" strokeWidth="0.5"/>
+      <text x="286" y="349" dominantBaseline="central" fontSize="10" fill="#888780">종료 / 반려</text>
+      <rect x="370" y="344" width="10" height="10" rx="2" fill="#F1EFE8" stroke="#B4B2A9" strokeWidth="0.5"/>
+      <text x="386" y="349" dominantBaseline="central" fontSize="10" fill="#888780">처리 중</text>
     </svg>
   );
 }
