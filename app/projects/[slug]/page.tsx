@@ -2,19 +2,19 @@
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProjectBySlug, projects } from "./projectData";
-import SlowQueryExecutionPlan from "./components/SlowQueryExecutionPlan";
-import SlowQueryChart from "./components/SlowQueryChart";
-import WizpaySequenceDiagram from "./components/WizpaySequenceDiagram";
-import WizpayPlatformFlow from "./components/WizpayPlatformFlow";
-import MdReviewS3Flow from "./components/MdReviewS3Flow";
-import MdReviewArchitecture from "./components/MdReviewArchitecture";
-import BoPoExcelFlow from "./components/BoPoExcelFlow";
-import BoPoStateDiagram from "./components/BoPoStateDiagram";
-import TogatherERD from "./components/TogatherERD";
-import TogatherMVC from "./components/TogatherMVC";
-import OrderSystemERD from "./components/OrderSystemERD";
-import CovidSweepersArch from "./components/CovidSweepersArch";
+import { getProjectBySlug, projects } from "../projectData";
+import SlowQueryExecutionPlan from "../components/SlowQueryExecutionPlan";
+import SlowQueryChart from "../components/SlowQueryChart";
+import WizpaySequenceDiagram from "../components/WizpaySequenceDiagram";
+import WizpayPlatformFlow from "../components/WizpayPlatformFlow";
+import MdReviewS3Flow from "../components/MdReviewS3Flow";
+import MdReviewArchitecture from "../components/MdReviewArchitecture";
+import BoPoExcelFlow from "../components/BoPoExcelFlow";
+import BoPoStateDiagram from "../components/BoPoStateDiagram";
+import TogatherERD from "../components/TogatherERD";
+import TogatherMVC from "../components/TogatherMVC";
+import OrderSystemERD from "../components/OrderSystemERD";
+import CovidSweepersArch from "../components/CovidSweepersArch";
 
 /* ------------------------------------------------------------------ */
 /*  정적 경로 생성                                                        */

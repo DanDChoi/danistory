@@ -16,10 +16,10 @@ export default function Header({ categories = [] }: { categories?: string[] }) {
         <div className="max-w-5xl mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
           <Link href="/">
             <Image
-                src="/img/danistory.png"
+                src="/img/danistory_new3.png"
                 alt="danistory"
-                width={120}
-                height={30}
+                width={140}
+                height={50}
             />
           </Link>
 
@@ -112,6 +112,7 @@ export default function Header({ categories = [] }: { categories?: string[] }) {
         >
           <div className="border-t px-4 py-4 space-y-3 bg-white">
             <Link href="/" className="block text-gray-700 hover:text-blue-600">Home</Link>
+            <Link href="/projects" className="block text-gray-700 hover:text-blue-600">Projects</Link>
             <Link href="/blog" className="block text-gray-700 hover:text-blue-600">Blog</Link>
             <Link href="/guestbook" className="block text-gray-700 hover:text-blue-600">Guestbook</Link>
 
