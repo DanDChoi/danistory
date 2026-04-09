@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 // 지원할 provider만 명시 (string 유니온 제거)
-type OAuthProvider = "google" | "kakao" | "naver";
+type OAuthProvider = "google" | "kakao"; //naver는 supabase 미지원
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -125,16 +125,17 @@ export default function LoginPage() {
                         Kakao로 로그인
                     </button>
 
-                    {/* Naver */}
+                    {/* Naver -연동준비중 */}
                     <button
                         className="w-full flex items-center justify-center gap-2.5 rounded-xl py-2.5 text-sm font-medium text-white transition hover:brightness-95"
                         style={{ background: "#03C75A" }}
-                        onClick={() => handleOAuth("naver")}
+                        disabled
+                        // onClick={() => handleOAuth("naver")}
                     >
                         <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="white">
                             <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727z" />
                         </svg>
-                        Naver로 로그인
+                        Naver로 로그인 <span className="text-xs opacity-70">(준비 중)</span>
                     </button>
                 </div>
 
