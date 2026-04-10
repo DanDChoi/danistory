@@ -6,6 +6,8 @@
 [Danistory](https://danistory.vercel.app/)
 
 Next.js App Router 기반으로 만든 개인 포트폴리오 웹사이트입니다.  
+Chat GPT와 Claude를 활용해 바이브코딩을 통해 만들어졌습니다.  
+
 블로그 콘텐츠는 Markdown 파일로 관리하고, 빌드 시 파일을 읽어 정적으로 렌더링하도록 구성했습니다.  
 
 라우팅은 /blog → /blog/[category] → /blog/[slug] 구조로 설계해서  
