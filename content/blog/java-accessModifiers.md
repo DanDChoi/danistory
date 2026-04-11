@@ -4,7 +4,7 @@ date: 2026-03-30
 description: 자바의 접근제어자 종류와 차이
 category: java
 ---
-
+![이미지](/img/java-accessModifier.png)
 ### 자바의 접근제어자 종류와 차이
 
 #### 1. 접근제어자란?
