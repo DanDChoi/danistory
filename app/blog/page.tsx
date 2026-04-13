@@ -1,7 +1,11 @@
 import { getAllPosts } from "@/lib/blog";
 import PostGrid from "@/components/blog/PostGrid";
 
-export default async function BlogPage({ searchParams }: { searchParams?: { page?: string } }) {
+interface BlogPageProps {
+    searchParams?: Promise<{ page?: string }>;
+}
+
+export default async function BlogPage({ searchParams }: BlogPageProps) {
     const posts = getAllPosts();
 
     const sortedPosts = [...posts].sort((a, b) => {
