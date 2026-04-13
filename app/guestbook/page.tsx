@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { User } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
@@ -48,11 +49,25 @@ export default function GuestbookPage() {
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
     const [list, setList] = useState<Guestbook[]>([]);
-    const [user, setUser] = useState<any>(null);
+    const [user, setUser] = useState<User | null>(null);
+    const metadataName =
+        user?.user_metadata?.nickname ||
+        user?.user_metadata?.name ||
+        user?.user_metadata?.full_name ||
+        "";
+    const resolvedName = name.trim() || metadataName;
 
     useEffect(() => {
         supabase.auth.getUser().then(({ data }) => setUser(data.user));
-        fetchGuestbook();
+        void supabase
+            .from("guestbook")
+            .select("*")
+            .order("created_at", { ascending: false })
+            .then(({ data, error }) => {
+                if (!error && data) {
+                    setList(data);
+                }
+            });
     }, []);
 
     useEffect(() => {
@@ -62,29 +77,31 @@ export default function GuestbookPage() {
         return () => subscription.unsubscribe();
     }, []);
 
-    const fetchGuestbook = async () => {
-        const { data, error } = await supabase
-            .from("guestbook")
-            .select("*")
-            .order("created_at", { ascending: false });
-        if (!error && data) setList(data);
-    };
-
     const handleSubmit = async () => {
         const { error } = await supabase
             .from("guestbook")
-            .insert([{ name, message, user_id: user?.id }]);
+            .insert([{ name: resolvedName, message, user_id: user?.id }]);
         if (!error) {
             setName("");
             setMessage("");
-            fetchGuestbook();
+            const { data, error: fetchError } = await supabase
+                .from("guestbook")
+                .select("*")
+                .order("created_at", { ascending: false });
+            if (!fetchError && data) setList(data);
         }
     };
 
     const handleDelete = async (id: string) => {
         if (!confirm("정말 삭제하시겠습니까?")) return;
         const { error } = await supabase.from("guestbook").delete().eq("id", id);
-        if (!error) fetchGuestbook();
+        if (!error) {
+            const { data, error: fetchError } = await supabase
+                .from("guestbook")
+                .select("*")
+                .order("created_at", { ascending: false });
+            if (!fetchError && data) setList(data);
+        }
     };
 
     return (
@@ -147,7 +164,7 @@ export default function GuestbookPage() {
                         <div className="space-y-3">
                             <input
                                 className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                                placeholder="이름"
+                                placeholder={metadataName || "이름"}
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />
@@ -160,7 +177,7 @@ export default function GuestbookPage() {
                             <button
                                 className="inline-flex w-full items-center justify-center rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-400"
                                 onClick={handleSubmit}
-                                disabled={!name.trim() || !message.trim()}
+                                disabled={!resolvedName || !message.trim()}
                             >
                                 등록
                             </button>

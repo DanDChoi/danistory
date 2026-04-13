@@ -11,6 +11,7 @@ type OAuthProvider = "google" | "kakao"; //naver는 supabase 미지원
 export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [oauthLoading, setOauthLoading] = useState<OAuthProvider | null>(null);
     const router = useRouter();
 
     const handleLogin = async () => {
@@ -23,11 +24,17 @@ export default function LoginPage() {
     };
 
     const handleOAuth = async (provider: OAuthProvider) => {
+        setOauthLoading(provider);
         const { error } = await supabase.auth.signInWithOAuth({
             provider,
-            options: { redirectTo: `${window.location.origin}/guestbook` },
+            options: {
+                redirectTo: `${window.location.origin}/auth/callback?next=/guestbook`,
+            },
         });
-        if (error) alert(error.message);
+        if (error) {
+            setOauthLoading(null);
+            alert(error.message);
+        }
     };
 
     return (
@@ -100,6 +107,7 @@ export default function LoginPage() {
                     <button
                         className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-gray-200 bg-white py-2.5 text-sm text-gray-700 transition hover:bg-gray-50"
                         onClick={() => handleOAuth("google")}
+                        disabled={oauthLoading !== null}
                     >
                         <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -115,6 +123,7 @@ export default function LoginPage() {
                         className="w-full flex items-center justify-center gap-2.5 rounded-xl py-2.5 text-sm font-medium transition hover:brightness-95"
                         style={{ background: "#FEE500", color: "#191919" }}
                         onClick={() => handleOAuth("kakao")}
+                        disabled={oauthLoading !== null}
                     >
                         <svg className="w-4 h-4 shrink-0" viewBox="0 0 18 16" fill="none">
                             <path
@@ -122,7 +131,7 @@ export default function LoginPage() {
                                 fill="#191919"
                             />
                         </svg>
-                        Kakao로 로그인
+                        {oauthLoading === "kakao" ? "Kakao로 이동 중..." : "Kakao로 로그인"}
                     </button>
 
                     {/* Naver -연동준비중 */}
