@@ -7,12 +7,40 @@ import remarkRehype from "remark-rehype";
 import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 import CodeBlockCopy from "@/components/blog/CodeBlockCopy";
+import { getAllPosts } from "@/lib/blog";
+import type { Metadata } from "next";
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ category: string; slug: string }>;
 }
 
 const postsDirectory = path.join(process.cwd(), "content/blog");
+
+export async function generateStaticParams() {
+  const posts = getAllPosts();
+  return posts.map((post) => ({
+    category: post.category,
+    slug: post.slug,
+  }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const fullPath = path.join(postsDirectory, `${slug}.md`);
+  if (!fs.existsSync(fullPath)) return {};
+  const { data } = matter(fs.readFileSync(fullPath, "utf8"));
+  return {
+    title: data.title,
+    description: data.description ?? data.title,
+    openGraph: {
+      title: data.title,
+      description: data.description ?? data.title,
+      type: "article",
+      publishedTime: data.date,
+      ...(data.thumbnail ? { images: [{ url: data.thumbnail }] } : {}),
+    },
+  };
+}
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params;
