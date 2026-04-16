@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import VisitorCounter from "./VisitorCounter";
 
 const sections = [
   { id: "hero", label: "Introduce" },
@@ -81,6 +82,10 @@ export default function SideNav() {
           </span>
         </a>
       ))}
+
+      <div className="mt-2 pt-3 border-t border-gray-200">
+        <VisitorCounter />
+      </div>
     </div>
   );
 }
