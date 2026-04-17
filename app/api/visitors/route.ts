@@ -9,16 +9,19 @@ const supabase = createClient(
 
 const OWNER_EMAIL = "danchoi.dev@gmail.com";
 
-export async function GET() {
-  const todayStart = new Date();
-  todayStart.setHours(0, 0, 0, 0);
+function kstMidnightISO(): string {
+  const kst = new Date(Date.now() + 9 * 60 * 60 * 1000);
+  kst.setUTCHours(0, 0, 0, 0);
+  return kst.toISOString().replace("Z", "+09:00");
+}
 
+export async function GET() {
   const [{ count: total }, { count: todayCount }] = await Promise.all([
     supabase.from("page_views").select("*", { count: "exact", head: true }),
     supabase
       .from("page_views")
       .select("*", { count: "exact", head: true })
-      .gte("visited_at", todayStart.toISOString()),
+      .gte("visited_at", kstMidnightISO()),
   ]);
 
   return NextResponse.json({ total: total ?? 0, today: todayCount ?? 0 });
