@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
 import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -48,6 +49,7 @@ export default function RootLayout({
       <body className="antialiased">
         <Header categories={categories} />
         {children}
+        <Footer />
       </body>
     </html>
   );
