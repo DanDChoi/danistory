@@ -331,6 +331,68 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "danistory",
+    index: "01",
+    category: "사이드 프로젝트",
+    company: "개인 프로젝트",
+    companyPeriod: "2025 – 현재",
+    title: "Danistory",
+    period: "2025 – 현재",
+    type: "SIDE PROJECT",
+    typeStyle: "bg-teal-50 text-teal-800",
+    accentClass: "bg-teal-500",
+    accentHex: "#0D9488",
+    summary:
+      "이력서·포트폴리오·블로그를 하나로 합친 개인 웹사이트입니다. Claude Code(AI)를 활용한 바이브코딩 방식으로 개발했으며, 기획·구조 설계·콘텐츠 작성은 직접 담당했습니다.",
+    metrics: [
+      { value: "바이브코딩", label: "AI 협업 개발" },
+      { value: "Supabase", label: "OAuth + 방명록 DB" },
+      { value: "Vercel", label: "CI/CD 자동 배포" },
+    ],
+    tech: ["Next.js 16", "TypeScript", "Tailwind CSS v4", "Supabase", "Vercel", "React"],
+    sections: [
+      {
+        title: "개발 방식",
+        items: [
+          "Claude Code(AI)를 활용한 바이브코딩(Vibe Coding) 방식으로 구현",
+          "기획, 사이트 구조 설계, 콘텐츠 작성, 피드백 및 방향 결정은 직접 담당",
+          "AI가 생성한 코드를 검토·수정하며 Next.js App Router / Supabase 동작 원리를 학습",
+        ],
+      },
+      {
+        title: "주요 기능",
+        items: [
+          "이력서·포트폴리오·블로그를 하나의 사이트에 통합",
+          "Markdown 기반 블로그: remark → rehype-highlight 파이프라인으로 서버사이드 렌더링 및 코드 하이라이팅",
+          "프로젝트 페이지: 아코디언 UI와 다이어그램 컴포넌트로 기술 상세 시각화",
+          "방명록: Supabase Auth(Google/Kakao OAuth) 연동, 본인 글만 삭제 가능",
+          "방문자 수 카운터, sitemap/robots.ts 자동 생성",
+        ],
+      },
+      {
+        title: "기술 상세",
+        items: [
+          "Next.js 16 App Router 기반의 파일 시스템 라우팅 및 서버 컴포넌트 활용",
+          "Tailwind CSS v4 유틸리티 클래스만 사용 (CSS 모듈 미사용)",
+          "Supabase 클라이언트 단일 인스턴스로 인증·DB 처리 통합",
+          "gray-matter로 Markdown frontmatter 파싱, 빌드 타임에 정적 생성",
+          "Google/Kakao OAuth → /auth/callback 흐름 설계 및 구현",
+        ],
+      },
+      {
+        title: "배운 점",
+        items: [
+          "Java/Spring 백엔드 경험을 바탕으로 Next.js의 서버/클라이언트 컴포넌트 경계를 이해하며 프론트엔드 구조 학습",
+          "App Router 기반 파일 시스템 라우팅, 정적 생성(SSG) 흐름 파악",
+          "Supabase RLS(Row Level Security) 정책을 통한 데이터 접근 제어 개념 습득",
+        ],
+      },
+    ],
+    links: {
+      github: "https://github.com/DanDChoi/danistory",
+    },
+  },
+  {
     slug: "covid-sweepers",
     index: "03",
     category: "개인 프로젝트",

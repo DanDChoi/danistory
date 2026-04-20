@@ -41,6 +41,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const posts = getAllPosts();
+
+
+
+
   const categories = [...new Set(posts.map(p => p.category))]
     .filter(Boolean)
     .sort((a, b) => a.localeCompare(b));
