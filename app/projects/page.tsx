@@ -26,6 +26,13 @@ const GROUPS = [
     period: "2021.11 – 2022.04",
     slugs: ["togather", "order-system-db", "covid-sweepers"],
   },
+  {
+    id: "side",
+    label: "SIDE PROJECT",
+    company: "개인 프로젝트",
+    period: "2025 – 현재",
+    slugs: ["danistory"],
+  },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -85,10 +92,7 @@ export default function ProjectsPage() {
             .filter((p) => {
               const matchCompany =
                   companyFilter === "all" ||
-                  (companyFilter === "wizwid" &&
-                      GROUPS[0].slugs.includes(p.slug)) ||
-                  (companyFilter === "kosmo" &&
-                      GROUPS[1].slugs.includes(p.slug));
+                  GROUPS.find((g) => g.id === companyFilter)?.slugs.includes(p.slug);
               const matchTech =
                   techFilter.length === 0 ||
                   techFilter.every((t) => p.tech.includes(t));
@@ -146,8 +150,8 @@ export default function ProjectsPage() {
             <span className="font-mono text-[10px] text-gray-400 tracking-widest shrink-0 w-16">
               COMPANY
             </span>
-              {(["all", "wizwid", "kosmo"] as const).map((id) => {
-                const labelMap = { all: "전체", wizwid: "WIZWID", kosmo: "KOSMO" };
+              {(["all", "wizwid", "kosmo", "side"] as const).map((id) => {
+                const labelMap = { all: "전체", wizwid: "WIZWID", kosmo: "KOSMO", side: "SIDE" };
                 const active = companyFilter === id;
                 return (
                     <button
@@ -220,13 +224,12 @@ export default function ProjectsPage() {
 
             return (
                 <section key={group.id} className={groupIdx > 0 ? "mt-12 md:mt-16" : ""}>
-                  {/* 그룹 구분선 (KOSMO 앞에만) */}
                   {groupIdx > 0 && (
                       <div className="flex items-center gap-4 mb-10 md:mb-12">
                         <div className="flex-1 h-px bg-gray-200" />
                         <span className="font-mono text-[11px] text-gray-400 tracking-widest shrink-0">
-                    EDUCATION
-                  </span>
+                          {group.id === "kosmo" ? "EDUCATION" : group.label}
+                        </span>
                         <div className="flex-1 h-px bg-gray-200" />
                       </div>
                   )}

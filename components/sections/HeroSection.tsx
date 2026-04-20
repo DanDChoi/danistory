@@ -1,5 +1,6 @@
 import { Mail, Download, Copy, Check } from "lucide-react";
 import { SiGithub } from "react-icons/si";
+import { FaLinkedinIn } from "react-icons/fa";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -77,10 +78,18 @@ export default function HeroSection() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors text-sm"
               >
-                <span className="flex items-center gap-2">
-                  <SiGithub className="w-4 h-4 text-current" />
-                  <span>GitHub</span>
-                </span>
+                <SiGithub className="w-4 h-4 text-current" />
+                <span>GitHub</span>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/danchoi-dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors text-sm"
+              >
+                <FaLinkedinIn className="w-4 h-4 text-current" />
+                <span>LinkedIn</span>
               </a>
             </div>
 
