@@ -26,10 +26,10 @@ export default function HeroSection() {
             <div className="relative">
               <div className="relative w-36 h-36 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-blue-100 shadow-xl">
                 <Image
-                  src="/img/profile.jpg"
+                  src="/img/profile_2.jpg"
                   alt="profile"
                   fill
-                  className="object-cover rounded-full"
+                  className="object-cover object-[center_10%] rounded-full scale-110"
                 />
               </div>
 
