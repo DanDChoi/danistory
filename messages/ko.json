@@ -1,0 +1,199 @@
+{
+  "hero": {
+    "badge": "🏆 2023 우수사원",
+    "role": "Backend Developer",
+    "tagline": "기록과 커뮤니케이션을 무기로",
+    "subtitle": "문제를 해결하는 개발자",
+    "download": "이력서 다운로드",
+    "contact": "연락하기"
+  },
+  "about": {
+    "title": "About Me",
+    "card1Title": "2년 7개월",
+    "card1Desc": "WIZWID 이커머스 플랫폼 운영",
+    "card2Title": "2023 우수사원",
+    "card2Desc": "성과 기반 문제해결 역량 인정",
+    "card3Title": "호주 5년 거주",
+    "card3Desc": "영어 일상 회화 가능",
+    "p1Lead": "작은 문제를 반복해서 마주치며,",
+    "p1Highlight": "개선의 실마리를 찾는 개발자",
+    "p1Tail": "입니다.",
+    "p2": "장기적으로 유지되는 쇼핑몰 플랫폼을 운영하며 백오피스와 파트너오피스 등 실무 부서와 긴밀히 협업해왔고, 상품 노출, 주문, 결제까지 사용자 여정 전반을 안정적으로 관리하며, 더 나은 경험을 설계하는 데 집중했습니다.",
+    "p3": "단순 기능 구현을 넘어서, 현업의 맥락을 이해하고 흐름에 맞는 개발을 지향해왔습니다. 특히, 속도 개선·데이터 최적화·운영 안정성 등 반복적이지만 중요한 영역에서 지속적인 개선을 만들어낸 경험이 많습니다.",
+    "p3Highlight": "속도 개선·데이터 최적화·운영 안정성",
+    "p4": "결국 좋은 서비스는 작은 디테일과 소통에서 시작된다는 것을 믿고, 그렇게 실천해왔습니다."
+  },
+  "skills": {
+    "title": "Skills",
+    "backendItems": [
+      { "name": "Java / Spring MVC", "desc": "이커머스 플랫폼 전반의 주문·결제 로직 및 API 개발" },
+      { "name": "Spring Batch", "desc": "정기 배치 작업 및 자동화 처리 로직 구현" },
+      { "name": "MyBatis", "desc": "복잡한 비즈니스 로직 쿼리 처리 및 XML 기반 매핑" },
+      { "name": "Gradle / Maven", "desc": "프로젝트 환경에 따른 빌드 설정 및 의존성 관리" }
+    ],
+    "frontendItems": [
+      { "name": "HTML / CSS / JSTL", "desc": "관리자 화면 구성 및 유지보수 중심의 UI 설계" },
+      { "name": "JavaScript / jQuery", "desc": "BackOffice/PartnerOffice UI 동작 구현" },
+      { "name": "Ajax", "desc": "비동기 통신 기반의 데이터 처리 및 화면 반영" }
+    ],
+    "devopsItems": [
+      { "name": "AWS EC2 / RDS", "desc": "운영 환경에서 EC2 기반 WAS와 RDS PostgreSQL 운용" },
+      { "name": "AWS S3", "desc": "상품 이미지 및 첨부파일 업로드 처리" },
+      { "name": "PostgreSQL", "desc": "슬로우 쿼리 튜닝, 인덱스 설계, 대량 트랜잭션 처리" },
+      { "name": "Jennifer APM", "desc": "WAS 병목 구간 분석 및 응답 지연 원인 파악" },
+      { "name": "CloudWatch / GTM", "desc": "로그 모니터링 및 전환 추적 태그 관리" }
+    ]
+  },
+  "career": {
+    "title": "Career",
+    "award": "2023 우수사원",
+    "company": "(주)엑시온그룹",
+    "role": "패션 이커머스 플랫폼 WIZWID 운영 및 기능 개선",
+    "period": "2022.10 - 2025.05 (2년 7개월)",
+    "achievementsTitle": "주요 성과",
+    "achievements": [
+      "주문·결제·상품 전시 등 사용자 흐름 전반 유지 및 고도화",
+      "BackOffice / PartnerOffice 실무 기능 개발 및 운영 편의성 향상",
+      "PostgreSQL 슬로우 쿼리 튜닝, 인덱스 최적화, 반복 쿼리 제거",
+      "MD 상품평 / 자체페이(WIZpay) / 대량 엑셀 처리 기능 등 프로젝트 수행"
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "resultLabel": "성과",
+    "roleLabel": "역할",
+    "techLabel": "기술",
+    "items": [
+      {
+        "id": "1",
+        "colorKey": "blue",
+        "title": "슬로우 쿼리 개선",
+        "period": "2023.10 - 2023.12",
+        "summary": "PostgreSQL 기반의 대형 트랜잭션 쿼리들에 대해 실행 계획 분석 및 인덱스 최적화",
+        "tech": ["PostgreSQL", "Query Tuning", "AWS RDS"],
+        "result": [
+          "로그인, 마이페이지, 주문 상세 등 주요 페이지의 응답 속도 평균 90% 이상 개선",
+          "마이페이지 상품 리뷰: 3,000ms → 70ms (약 97.7% 향상)",
+          "클레임 조회: 2,600ms → 117ms (약 95.5% 향상)",
+          "쿠폰 발급 Count: 500ms → 29ms (약 94.2% 향상)",
+          "전체 페이지 로딩 성능 향상으로 사용자 이탈률 감소 및 고객사 만족도 증가"
+        ],
+        "role": [
+          "PostgreSQL 기반의 대형 트랜잭션 쿼리들에 대해 실행 계획(Execution Plan) 분석 및 인덱스 최적화 설계",
+          "공통 모듈에서 반복 호출되던 중복 쿼리 제거, 필요한 데이터만 조회하도록 SELECT 범위 제한",
+          "단순 튜닝을 넘어 업무 흐름을 고려한 쿼리 로직 재설계 및 적용",
+          "pg_stat_statements, auto_explain 모듈을 활용한 슬로우 쿼리 로그 수집"
+        ],
+        "techDetail": [
+          "EXPLAIN ANALYZE, pgBadger, DataGrip를 통한 실행 계획 상세 분석",
+          "개발 환경에서 쿼리 튜닝 A/B 테스트 진행 후 운영 서버에 점진적 반영",
+          "AWS RDS Slow Query Log + CloudWatch 지표 연동으로 장기적인 모니터링 체계 구성"
+        ]
+      },
+      {
+        "id": "2",
+        "colorKey": "indigo",
+        "title": "자체페이(WIZpay) 개발",
+        "period": "2023.01 - 2023.04",
+        "summary": "주문서 진입 시 회원이 등록한 카드 정보를 외부 API로 실시간 조회하여 사용자 맞춤 결제 옵션 제공",
+        "tech": ["Java", "Spring MVC", "REST API"],
+        "result": [
+          "주문서 진입 시, 회원이 등록한 카드 정보를 외부 API로 실시간 조회하여 사용자 맞춤 결제 옵션 제공",
+          "카드사별 무이자, 일반 할부, 체크/신용카드 여부에 따라 자동 분기된 UI를 통해 사용자 편의성 향상",
+          "PC / 모바일 웹 / 앱 환경에서 동일한 결제 경험을 제공하며 플랫폼별 UX 일관성 확보",
+          "복잡한 카드사 정책을 자동화하여 CS 감소 및 영업팀의 수동 대응 부담 완화"
+        ],
+        "role": [
+          "외부 카드사 API 연동 및 응답 데이터 파싱 처리",
+          "카드 조건에 따라 결제 옵션을 동적으로 구성하는 로직 구현",
+          "주문서 진입 시점에 카드 정보 조회 및 UI에 자동 반영되도록 API 연동 설계",
+          "jQuery 기반 UI 요소(select box 등) 동작 로직 구현 및 PC/Mobile/App 플랫폼별 이벤트 처리 분기"
+        ],
+        "techDetail": [
+          "Java 및 Spring MVC 기반의 주문서 API 설계 및 카드사 연동 로직 구현",
+          "PostgreSQL을 활용한 카드 정보 및 결제 조건 저장/조회 처리",
+          "jQuery를 활용한 UI 요소의 동적 렌더링 및 사용자 선택 이벤트 처리",
+          "REST API 통신을 위한 요청/응답 처리 및 Postman 기반 테스트 수행",
+          "다양한 디바이스 환경을 고려한 이벤트 흐름 제어 및 반응형 대응"
+        ]
+      },
+      {
+        "id": "3",
+        "colorKey": "purple",
+        "title": "MD상품평 기능 개발",
+        "period": "2023.05",
+        "summary": "사이트 리뉴얼 이후 사라졌던 MD상품평 기능을 복구 및 개선하여 개발 요청 반영",
+        "tech": ["Java", "Spring MVC", "AWS S3"],
+        "result": [
+          "사이트 리뉴얼 이후 사라졌던 기능을 복구 및 개선",
+          "영업팀 요청에 따라 BackOffice에 신규 MD상품평 관리 기능 구현",
+          "텍스트와 이미지 기반의 상품평 등록 기능 제공으로 브랜드 홍보 및 전환율 개선에 기여",
+          "BackOffice에서 일괄 등록 가능해지며 운영 효율 향상"
+        ],
+        "role": [
+          "상품평 등록 화면 및 데이터 처리 로직 전체 설계",
+          "AWS S3 임시 버킷에 이미지 업로드 → 등록 시 메인 버킷으로 복사되는 파일 처리 흐름 구현",
+          "관리자 화면 UI/UX 구현 및 저장/조회 API 개발 (jQuery + Spring MVC 기반)",
+          "등록된 상품평이 프론트에 반영되도록 전시 모듈 연동 담당"
+        ],
+        "techDetail": [
+          "Java, Spring MVC 기반의 상품평 등록/조회 API 개발",
+          "AWS S3를 활용한 이미지 업로드 및 버킷 간 복사 처리 구현",
+          "jQuery와 JSTL을 활용한 BackOffice 내 동적 UI 구성",
+          "PostgreSQL 기반 데이터 저장 및 연동",
+          "Git 및 SourceTree를 활용한 버전 관리, IntelliJ 기반 개발"
+        ]
+      },
+      {
+        "id": "4",
+        "colorKey": "sky",
+        "title": "BO/PO 사용성 개선",
+        "period": "2022.10 - 2022.12",
+        "summary": "BackOffice/PartnerOffice 사용자들의 운영 효율성 및 데이터 일관성 향상",
+        "tech": ["Java", "Spring MVC", "REST API"],
+        "result": [
+          "브랜드/MD 정보 변경 요청 흐름 파악 후, 엑셀 기반 대량 변경 등록 기능 설계 및 구현",
+          "엑셀 데이터 유효성 검증 및 변경 내역 로깅 처리",
+          "입점사 상태 및 계약 만료 여부에 따른 퇴점 프로세스 설계 및 업무 흐름 반영",
+          "관리자 화면에서 퇴점 업체를 식별 및 관리할 수 있도록 데이터 모델 및 전시 로직 설계"
+        ],
+        "role": [
+          "Java, Spring MVC 기반의 엑셀 업로드 처리 및 데이터 반영 로직 구현",
+          "Apache POI를 활용한 엑셀 파일 파싱 및 유효성 검사",
+          "PostgreSQL 기반의 상태값 관리 및 업체별 퇴점 플래그 로직 처리",
+          "jQuery 기반의 관리자 화면 UI 처리 및 결과 피드백 표시",
+          "Git, IntelliJ, Notion을 통한 이슈 관리 및 커뮤니케이션"
+        ],
+        "techDetail": [
+          "Spring MVC 기반 결제 API 설계",
+          "REST API 통신 및 테스트"
+        ]
+      }
+    ]
+  },
+  "education": {
+    "title": "Education",
+    "edu1Title": "프로젝트 중심의 풀스택 개발자 양성과정",
+    "edu1Period": "2021.11 - 2022.04",
+    "edu1Duration": "6개월",
+    "edu1Org": "KOSMO (한국소프트웨어인재개발원)",
+    "edu1Items": [
+      "Java / Spring / Oracle DB 중심 4개 팀 프로젝트 수행",
+      "파이널 프로젝트: Spring 기반 웹 애플리케이션 개발",
+      "최우수 프로젝트상, 100% 출석(열정상) 수상"
+    ],
+    "edu2Title": "서울신학대학교",
+    "edu2Period": "2008.03 - 2014.02",
+    "edu2Degree": "4년제 졸업",
+    "certTitle": "자격증",
+    "certName": "정보처리기사",
+    "certStatus": "(필기합격)"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "새로운 기회에 대해 이야기 나누고 싶습니다.",
+    "subtitleSub": "언제든지 편하게 연락 주세요!",
+    "copy": "복사",
+    "copied": "복사됨"
+  }
+}

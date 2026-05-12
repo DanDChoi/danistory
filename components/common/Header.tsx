@@ -3,13 +3,21 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Download } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { useLocale } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 
 export default function Header({ categories = [] }: { categories?: string[] }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const locale = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const toggleLocale = () => {
+    const nextLocale = locale === "ko" ? "en" : "ko";
+    router.replace(pathname, { locale: nextLocale });
+  };
 
   return (
       <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
@@ -91,9 +99,18 @@ export default function Header({ categories = [] }: { categories?: string[] }) {
             >
             <span className="flex items-center gap-2">
               <Download className="w-4 h-4" />
-              이력서
+              {locale === "en" ? "Resume" : "이력서"}
             </span>
             </a>
+
+            <button
+                onClick={toggleLocale}
+                className="flex items-center gap-1 text-sm px-1 py-1 transition"
+            >
+              <span className={locale === "ko" ? "font-bold text-gray-900" : "text-gray-400"}>KO</span>
+              <span className="text-gray-300">|</span>
+              <span className={locale === "en" ? "font-bold text-gray-900" : "text-gray-400"}>EN</span>
+            </button>
           </nav>
 
           {/* Mobile Button */}
@@ -116,6 +133,15 @@ export default function Header({ categories = [] }: { categories?: string[] }) {
             <Link href="/blog" className="block text-gray-700 hover:text-blue-600">Blog</Link>
             <Link href="/guestbook" className="block text-gray-700 hover:text-blue-600">Guestbook</Link>
 
+            <button
+                onClick={toggleLocale}
+                className="flex items-center gap-1 text-sm border border-gray-200 rounded-md px-2 py-1 w-fit hover:border-blue-400 transition"
+            >
+              <span className={locale === "ko" ? "font-bold text-gray-900" : "text-gray-400"}>KO</span>
+              <span className="text-gray-300">|</span>
+              <span className={locale === "en" ? "font-bold text-gray-900" : "text-gray-400"}>EN</span>
+            </button>
+
             <a
                 href="/resume.zip"
                 className="block text-center mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition"
@@ -123,7 +149,7 @@ export default function Header({ categories = [] }: { categories?: string[] }) {
             >
             <span className="flex items-center justify-center gap-2">
               <Download className="w-4 h-4" />
-              이력서
+              {locale === "en" ? "Resume" : "이력서"}
             </span>
             </a>
           </div>

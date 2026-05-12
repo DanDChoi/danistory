@@ -1,0 +1,199 @@
+{
+  "hero": {
+    "badge": "🏆 2023 Employee of the Year",
+    "role": "Backend Developer",
+    "tagline": "Armed with documentation and communication,",
+    "subtitle": "a developer who solves problems",
+    "download": "Download Resume",
+    "contact": "Contact Me"
+  },
+  "about": {
+    "title": "About Me",
+    "card1Title": "2 Yrs 7 Mos",
+    "card1Desc": "WIZWID E-commerce Platform Operations",
+    "card2Title": "2023 Employee of the Year",
+    "card2Desc": "Recognized for results-driven problem solving",
+    "card3Title": "5 Years in Australia",
+    "card3Desc": "Conversational English proficiency",
+    "p1Lead": "Repeatedly facing small problems,",
+    "p1Highlight": "a developer who finds the thread of improvement",
+    "p1Tail": ".",
+    "p2": "While operating a long-running e-commerce platform, I worked closely with in-house teams including BackOffice and PartnerOffice. I focused on reliably managing the full user journey — from product display and ordering to payment — and designing better experiences.",
+    "p3": "Beyond simple feature implementation, I have always aimed to understand the business context and develop in alignment with the workflow. I have particularly accumulated experience in making continuous improvements in areas that are repetitive yet critical, such as performance optimization, data efficiency, and operational stability.",
+    "p3Highlight": "performance optimization · data efficiency · operational stability",
+    "p4": "I believe that great services start with small details and good communication — and that's how I've practiced it."
+  },
+  "skills": {
+    "title": "Skills",
+    "backendItems": [
+      { "name": "Java / Spring MVC", "desc": "Order & payment logic and API development across the e-commerce platform" },
+      { "name": "Spring Batch", "desc": "Scheduled batch jobs and automated processing logic" },
+      { "name": "MyBatis", "desc": "Complex business logic query handling and XML-based mapping" },
+      { "name": "Gradle / Maven", "desc": "Build configuration and dependency management per project environment" }
+    ],
+    "frontendItems": [
+      { "name": "HTML / CSS / JSTL", "desc": "Admin UI design focused on structure and maintainability" },
+      { "name": "JavaScript / jQuery", "desc": "BackOffice/PartnerOffice UI behavior implementation" },
+      { "name": "Ajax", "desc": "Async data processing and real-time UI updates" }
+    ],
+    "devopsItems": [
+      { "name": "AWS EC2 / RDS", "desc": "EC2-based WAS and RDS PostgreSQL operation in production" },
+      { "name": "AWS S3", "desc": "Product image and file attachment upload handling" },
+      { "name": "PostgreSQL", "desc": "Slow query tuning, index design, and high-volume transaction processing" },
+      { "name": "Jennifer APM", "desc": "WAS bottleneck analysis and response delay root cause identification" },
+      { "name": "CloudWatch / GTM", "desc": "Log monitoring and conversion tracking tag management" }
+    ]
+  },
+  "career": {
+    "title": "Career",
+    "award": "2023 Employee of the Year",
+    "company": "Exion Group Co., Ltd.",
+    "role": "Fashion E-commerce Platform WIZWID — Operations & Feature Development",
+    "period": "Oct 2022 - May 2025 (2 yrs 7 mos)",
+    "achievementsTitle": "Key Achievements",
+    "achievements": [
+      "Maintained and enhanced the full user flow including orders, payments, and product display",
+      "Developed practical features for BackOffice / PartnerOffice and improved operational efficiency",
+      "PostgreSQL slow query tuning, index optimization, and elimination of redundant queries",
+      "Delivered projects including MD Reviews, WIZpay (in-house payment), and bulk Excel processing"
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "resultLabel": "Results",
+    "roleLabel": "Role",
+    "techLabel": "Tech",
+    "items": [
+      {
+        "id": "1",
+        "colorKey": "blue",
+        "title": "Slow Query Optimization",
+        "period": "Oct 2023 - Dec 2023",
+        "summary": "Analyzed execution plans and optimized indexes for large transaction queries on PostgreSQL",
+        "tech": ["PostgreSQL", "Query Tuning", "AWS RDS"],
+        "result": [
+          "Improved average response time by over 90% across key pages including login, My Page, and order detail",
+          "My Page product reviews: 3,000ms → 70ms (approx. 97.7% improvement)",
+          "Claim lookup: 2,600ms → 117ms (approx. 95.5% improvement)",
+          "Coupon issuance count query: 500ms → 29ms (approx. 94.2% improvement)",
+          "Overall page load improvement led to reduced bounce rates and increased client satisfaction"
+        ],
+        "role": [
+          "Analyzed execution plans and designed index optimizations for large PostgreSQL transaction queries",
+          "Eliminated duplicate queries called repeatedly in shared modules; restricted SELECT scope to necessary data",
+          "Redesigned query logic beyond simple tuning to reflect actual business flow",
+          "Collected slow query logs using pg_stat_statements and auto_explain modules"
+        ],
+        "techDetail": [
+          "Detailed execution plan analysis via EXPLAIN ANALYZE, pgBadger, and DataGrip",
+          "Conducted A/B testing of query tuning in dev environment before gradual production rollout",
+          "Built long-term monitoring setup with AWS RDS Slow Query Log integrated with CloudWatch"
+        ]
+      },
+      {
+        "id": "2",
+        "colorKey": "indigo",
+        "title": "WIZpay (In-house Payment) Development",
+        "period": "Jan 2023 - Apr 2023",
+        "summary": "Provided personalized payment options by fetching registered card info via external API in real time at checkout",
+        "tech": ["Java", "Spring MVC", "REST API"],
+        "result": [
+          "Delivered personalized payment options by real-time card info lookup via external API at checkout entry",
+          "Improved usability with auto-branched UI based on installment type and card category (debit/credit)",
+          "Ensured consistent payment UX across PC, mobile web, and app environments",
+          "Automated complex card issuer policies, reducing CS volume and manual burden on the sales team"
+        ],
+        "role": [
+          "Integrated external card issuer APIs and handled response data parsing",
+          "Implemented logic to dynamically compose payment options based on card conditions",
+          "Designed API integration to fetch card info at checkout and auto-reflect in UI",
+          "Implemented jQuery-based UI components (select boxes, etc.) with platform-specific event handling for PC/Mobile/App"
+        ],
+        "techDetail": [
+          "Designed checkout API and card issuer integration logic with Java and Spring MVC",
+          "Stored and retrieved card info and payment conditions using PostgreSQL",
+          "Dynamic rendering and user selection event handling via jQuery",
+          "Request/response handling for REST API communication and Postman-based testing",
+          "Event flow control and responsive design considering multi-device environments"
+        ]
+      },
+      {
+        "id": "3",
+        "colorKey": "purple",
+        "title": "MD Review Feature Development",
+        "period": "May 2023",
+        "summary": "Restored and improved the MD review feature that was removed during a site redesign",
+        "tech": ["Java", "Spring MVC", "AWS S3"],
+        "result": [
+          "Restored and improved a feature that was lost during site redesign",
+          "Built new MD review management functionality in BackOffice per sales team request",
+          "Contributed to brand promotion and conversion rate improvement via text and image-based reviews",
+          "Enabled bulk registration from BackOffice, improving operational efficiency"
+        ],
+        "role": [
+          "Designed the full review registration UI and data processing logic",
+          "Implemented file handling flow: upload to S3 temp bucket → copy to main bucket on submission",
+          "Developed admin UI/UX and save/retrieve API (jQuery + Spring MVC)",
+          "Integrated display module to reflect registered reviews on the front end"
+        ],
+        "techDetail": [
+          "Developed review registration/retrieval API with Java and Spring MVC",
+          "Implemented image upload and cross-bucket copy using AWS S3",
+          "Dynamic BackOffice UI with jQuery and JSTL",
+          "Data persistence and retrieval with PostgreSQL",
+          "Version control via Git and SourceTree; development in IntelliJ"
+        ]
+      },
+      {
+        "id": "4",
+        "colorKey": "sky",
+        "title": "BO/PO Usability Improvements",
+        "period": "Oct 2022 - Dec 2022",
+        "summary": "Improved operational efficiency and data consistency for BackOffice/PartnerOffice users",
+        "tech": ["Java", "Spring MVC", "REST API"],
+        "result": [
+          "Designed and implemented bulk Excel-based update feature after analyzing brand/MD change request flows",
+          "Added Excel data validation and change history logging",
+          "Designed vendor offboarding process reflecting contract expiry and partner status",
+          "Designed data model and display logic for admins to identify and manage offboarded vendors"
+        ],
+        "role": [
+          "Implemented Excel upload processing and data reflection logic with Java and Spring MVC",
+          "Excel file parsing and validation using Apache POI",
+          "Status value management and per-vendor offboarding flag logic with PostgreSQL",
+          "Admin UI handling and result feedback display with jQuery",
+          "Issue tracking and communication via Git, IntelliJ, and Notion"
+        ],
+        "techDetail": [
+          "Payment API design based on Spring MVC",
+          "REST API communication and testing"
+        ]
+      }
+    ]
+  },
+  "education": {
+    "title": "Education",
+    "edu1Title": "Full-Stack Developer Training (Project-Based)",
+    "edu1Period": "Nov 2021 - Apr 2022",
+    "edu1Duration": "6 months",
+    "edu1Org": "KOSMO (Korea Software Human Resource Development Institute)",
+    "edu1Items": [
+      "Completed 4 team projects focused on Java / Spring / Oracle DB",
+      "Final project: Web application development with Spring",
+      "Best Project Award & Perfect Attendance Award"
+    ],
+    "edu2Title": "Seoul Theological University",
+    "edu2Period": "Mar 2008 - Feb 2014",
+    "edu2Degree": "Bachelor's Degree (4-year)",
+    "certTitle": "Certification",
+    "certName": "Engineer Information Processing",
+    "certStatus": "(Written Exam Passed)"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "I'd love to talk about new opportunities.",
+    "subtitleSub": "Feel free to reach out anytime!",
+    "copy": "Copy",
+    "copied": "Copied"
+  }
+}

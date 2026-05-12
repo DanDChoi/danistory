@@ -1,10 +1,14 @@
+"use client";
+
 import { Mail, Download, Copy, Check } from "lucide-react";
 import { SiGithub } from "react-icons/si";
 import { FaLinkedinIn } from "react-icons/fa";
 import Image from "next/image";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function HeroSection() {
+  const t = useTranslations("hero");
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -34,14 +38,14 @@ export default function HeroSection() {
               </div>
 
               <div className="absolute -bottom-2 -right-2 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
-                🏆 2023 우수사원
+                {t("badge")}
               </div>
             </div>
           </div>
 
           {/* Content */}
           <div className="flex-1 text-center md:text-left">
-            <p className="text-blue-600 font-medium mb-2">Backend Developer</p>
+            <p className="text-blue-600 font-medium mb-2">{t("role")}</p>
 
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
               Dan | <span className="bg-gradient-to-r from-blue-800 to-blue-300 bg-clip-text text-transparent">
@@ -50,9 +54,9 @@ export default function HeroSection() {
             </h1>
 
             <p className="text-lg md:text-2xl text-gray-500 mb-6 leading-relaxed">
-              기록과 커뮤니케이션을 무기로
+              {t("tagline")}
               <br />
-              <span className="text-gray-900 font-medium">문제를 해결하는 개발자</span>
+              <span className="text-gray-900 font-medium">{t("subtitle")}</span>
             </p>
 
             {/* Contact pills */}
@@ -102,7 +106,7 @@ export default function HeroSection() {
               >
                 <span className="flex items-center justify-center gap-2">
                   <Download className="w-4 h-4" />
-                  <span>이력서 다운로드</span>
+                  <span>{t("download")}</span>
                 </span>
               </a>
 
@@ -110,7 +114,7 @@ export default function HeroSection() {
                 href="#contact"
                 className="w-full sm:w-auto px-6 py-3 border rounded-lg font-medium hover:bg-gray-100 transition"
               >
-                연락하기
+                {t("contact")}
               </a>
             </div>
           </div>

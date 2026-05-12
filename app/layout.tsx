@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer";
-import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://danistory.vercel.app"),
@@ -37,23 +34,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  const posts = getAllPosts();
-
-
-
-
-  const categories = [...new Set(posts.map(p => p.category))]
-    .filter(Boolean)
-    .sort((a, b) => a.localeCompare(b));
+}) {
   return (
-    <html lang="en">
+    <html suppressHydrationWarning>
       <body className="antialiased">
-        <Header categories={categories} />
         {children}
-        <Footer />
       </body>
     </html>
   );
