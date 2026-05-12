@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
-import { projects } from "@/app/projects/projectData";
+import { projects } from "@/app/[locale]/projects/projectData";
 
 const BASE_URL = "https://danistory.vercel.app";
 
