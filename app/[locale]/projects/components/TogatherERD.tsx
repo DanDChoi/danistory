@@ -1,6 +1,7 @@
 // app/projects/[slug]/components/TogatherERD.tsx
 
-export default function TogatherERD() {
+export default function TogatherERD({ locale }: { locale: string }) {
+  const e = locale === "en";
   return (
     <svg width="100%" viewBox="0 0 740 520" className="w-full">
       <defs>
@@ -84,41 +85,35 @@ export default function TogatherERD() {
       <text x="36" y="434" dominantBaseline="central" fontSize="11" fill="#2C2C2A">created_at</text>
 
       {/* ── Relations ── */}
-      {/* MEMBER → MEETING (host) */}
       <line x1="180" y1="100" x2="290" y2="100" stroke="#1D9E75" strokeWidth="1.5" markerEnd="url(#arr-erd)"/>
       <text x="218" y="92" fontSize="10" fill="#1D9E75">1</text>
       <text x="270" y="92" fontSize="10" fill="#1D9E75">N</text>
 
-      {/* MEETING → MEETING_MEMBER */}
       <line x1="460" y1="80" x2="558" y2="80" stroke="#888780" strokeWidth="1.5" markerEnd="url(#arr-erd)"/>
       <text x="468" y="72" fontSize="10" fill="#888780">1</text>
       <text x="540" y="72" fontSize="10" fill="#888780">N</text>
 
-      {/* MEMBER → MEETING_MEMBER */}
       <path d="M100 230 Q100 260 560 110" fill="none" stroke="#888780" strokeWidth="1.5" strokeDasharray="5 3" markerEnd="url(#arr-erd)"/>
-      <text x="310" y="255" fontSize="10" fill="#888780">N:M 참여</text>
+      <text x="310" y="255" fontSize="10" fill="#888780">{e ? "N:M Join" : "N:M 참여"}</text>
 
-      {/* MEETING → BOARD */}
       <line x1="375" y1="250" x2="375" y2="308" stroke="#7F77DD" strokeWidth="1.5" markerEnd="url(#arr-erd)"/>
       <text x="383" y="272" fontSize="10" fill="#7F77DD">1</text>
       <text x="383" y="296" fontSize="10" fill="#7F77DD">N</text>
 
-      {/* BOARD → PHOTO */}
       <line x1="460" y1="380" x2="558" y2="320" stroke="#7F77DD" strokeWidth="1.5" markerEnd="url(#arr-erd)"/>
       <text x="490" y="342" fontSize="10" fill="#7F77DD">1:N</text>
 
-      {/* BOARD → COMMENT */}
       <line x1="290" y1="400" x2="182" y2="400" stroke="#888780" strokeWidth="1.5" markerEnd="url(#arr-erd)"/>
       <text x="222" y="392" fontSize="10" fill="#888780">1</text>
       <text x="278" y="392" fontSize="10" fill="#888780">N</text>
 
       {/* ── Legend ── */}
       <rect x="20" y="500" width="10" height="10" rx="2" fill="#E1F5EE" stroke="#1D9E75" strokeWidth="0.5"/>
-      <text x="36"  y="505" dominantBaseline="central" fontSize="10" fill="#888780">회원 / 모임</text>
+      <text x="36"  y="505" dominantBaseline="central" fontSize="10" fill="#888780">{e ? "Member / Meeting" : "회원 / 모임"}</text>
       <rect x="140" y="500" width="10" height="10" rx="2" fill="#EEEDFE" stroke="#7F77DD" strokeWidth="0.5"/>
-      <text x="156" y="505" dominantBaseline="central" fontSize="10" fill="#888780">게시판 / 사진</text>
+      <text x="156" y="505" dominantBaseline="central" fontSize="10" fill="#888780">{e ? "Board / Photo" : "게시판 / 사진"}</text>
       <rect x="270" y="500" width="10" height="10" rx="2" fill="#F1EFE8" stroke="#B4B2A9" strokeWidth="0.5"/>
-      <text x="286" y="505" dominantBaseline="central" fontSize="10" fill="#888780">연결 / 댓글</text>
+      <text x="286" y="505" dominantBaseline="central" fontSize="10" fill="#888780">{e ? "Link / Comment" : "연결 / 댓글"}</text>
       <text x="390" y="505" dominantBaseline="central" fontSize="10" fill="#085041">🔑 PK</text>
       <text x="450" y="505" dominantBaseline="central" fontSize="10" fill="#534AB7">🔗 FK</text>
     </svg>
