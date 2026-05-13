@@ -3,13 +3,22 @@
 
 import { useEffect, useRef } from "react";
 
-const data = [
+const dataKo = [
   { label: "마이페이지 상품 리뷰", before: 3000, after: 70,  improvement: "97.7%" },
   { label: "클레임 조회",          before: 2600, after: 117, improvement: "95.5%" },
   { label: "쿠폰 발급 Count",      before: 500,  after: 29,  improvement: "94.2%" },
 ];
 
-export default function SlowQueryChart() {
+const dataEn = [
+  { label: "Mypage Product Review", before: 3000, after: 70,  improvement: "97.7%" },
+  { label: "Claim Lookup",          before: 2600, after: 117, improvement: "95.5%" },
+  { label: "Coupon Issue Count",    before: 500,  after: 29,  improvement: "94.2%" },
+];
+
+export default function SlowQueryChart({ locale }: { locale: string }) {
+  const e = locale === "en";
+  const data = e ? dataEn : dataKo;
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chartRef = useRef<unknown>(null);
 
@@ -33,7 +42,7 @@ export default function SlowQueryChart() {
           labels: data.map((d) => d.label),
           datasets: [
             {
-              label: "개선 전 (ms)",
+              label: e ? "Before (ms)" : "개선 전 (ms)",
               data: data.map((d) => d.before),
               backgroundColor: "#F09595",
               borderColor: "#E24B4A",
@@ -41,7 +50,7 @@ export default function SlowQueryChart() {
               borderRadius: 4,
             },
             {
-              label: "개선 후 (ms)",
+              label: e ? "After (ms)" : "개선 후 (ms)",
               data: data.map((d) => d.after),
               backgroundColor: "#5DCAA5",
               borderColor: "#1D9E75",
@@ -65,11 +74,7 @@ export default function SlowQueryChart() {
           scales: {
             x: {
               grid: { display: false },
-              ticks: {
-                font: { size: 12 },
-                color: "#888780",
-                autoSkip: false,
-              },
+              ticks: { font: { size: 12 }, color: "#888780", autoSkip: false },
             },
             y: {
               grid: { color: "rgba(136,135,128,0.15)" },
@@ -89,8 +94,7 @@ export default function SlowQueryChart() {
       initChart();
     } else {
       script = document.createElement("script");
-      script.src =
-        "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js";
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js";
       script.onload = initChart;
       document.head.appendChild(script);
     }
@@ -102,28 +106,25 @@ export default function SlowQueryChart() {
         chartRef.current = null;
       }
     };
-  }, []);
+  }, [locale]);
 
   return (
     <div>
-      {/* Chart */}
       <div className="relative w-full h-64 md:h-80">
         <canvas ref={canvasRef} />
       </div>
 
-      {/* Legend */}
       <div className="flex gap-5 mt-3">
         <span className="flex items-center gap-1.5 text-xs text-gray-500">
           <span className="w-2.5 h-2.5 rounded-sm bg-[#F09595] border border-[#E24B4A] inline-block" />
-          개선 전
+          {e ? "Before" : "개선 전"}
         </span>
         <span className="flex items-center gap-1.5 text-xs text-gray-500">
           <span className="w-2.5 h-2.5 rounded-sm bg-[#5DCAA5] border border-[#1D9E75] inline-block" />
-          개선 후
+          {e ? "After" : "개선 후"}
         </span>
       </div>
 
-      {/* Improvement badges */}
       <div className="grid grid-cols-3 gap-2 mt-4">
         {data.map((d) => (
           <div key={d.label} className="bg-blue-50 rounded-xl px-3 py-2.5 text-center">

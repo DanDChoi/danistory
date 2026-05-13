@@ -29,12 +29,12 @@ export async function generateStaticParams() {
 /* ------------------------------------------------------------------ */
 
 export async function generateMetadata({
-                                           params,
-                                       }: {
-    params: Promise<{ slug: string }>;
+    params,
+}: {
+    params: Promise<{ slug: string; locale: string }>;
 }) {
-    const { slug } = await params;
-    const project = getProjectBySlug(slug);
+    const { slug, locale } = await params;
+    const project = getProjectBySlug(slug, locale);
     if (!project) return {};
     return {
         title: `${project.title} | Projects`,
@@ -47,13 +47,15 @@ export async function generateMetadata({
 /* ------------------------------------------------------------------ */
 
 export default async function ProjectDetailPage({
-                                                    params,
-                                                }: {
-    params: Promise<{ slug: string }>;
+    params,
+}: {
+    params: Promise<{ slug: string; locale: string }>;
 }) {
-    const { slug } = await params;
-    const project = getProjectBySlug(slug);
+    const { slug, locale } = await params;
+    const project = getProjectBySlug(slug, locale);
     if (!project) notFound();
+
+    const isEn = locale === "en";
 
     return (
         <main className="min-h-screen bg-gray-50">
@@ -64,20 +66,14 @@ export default async function ProjectDetailPage({
                     href="/projects"
                     className="inline-flex items-center gap-1.5 font-mono text-xs text-gray-400 hover:text-gray-600 transition-colors mb-8 md:mb-10 group"
                 >
-          <span className="inline-block transition-transform duration-200 group-hover:-translate-x-1">
-            ←
-          </span>
-                    Projects로 돌아가기
+                    <span className="inline-block transition-transform duration-200 group-hover:-translate-x-1">←</span>
+                    {isEn ? "Back to Projects" : "Projects로 돌아가기"}
                 </Link>
 
                 {/* 헤더 카드 */}
                 <div className="bg-white rounded-2xl border border-gray-100 px-6 py-7 md:px-8 md:py-8 mb-6 relative overflow-hidden">
-                    {/* accent bar */}
-                    <div
-                        className={`absolute left-0 top-0 h-full w-[3px] ${project.accentClass}`}
-                    />
+                    <div className={`absolute left-0 top-0 h-full w-[3px] ${project.accentClass}`} />
 
-                    {/* 상단 메타 */}
                     <div className="flex items-start justify-between gap-3 mb-5">
                         <div>
                             <p className="font-mono text-[11px] text-gray-400 tracking-wide mb-1">
@@ -100,27 +96,21 @@ export default async function ProjectDetailPage({
                                 project.typeStyle,
                             ].join(" ")}
                         >
-              {project.type}
-            </span>
+                            {project.type}
+                        </span>
                     </div>
 
-                    {/* 제목 */}
                     <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight leading-tight mb-4">
                         {project.title}
                     </h1>
 
-                    {/* 요약 */}
                     <p className="text-sm text-gray-500 leading-relaxed mb-6">
                         {project.summary}
                     </p>
 
-                    {/* 메트릭 */}
                     <div className="grid grid-cols-3 gap-2 md:gap-3">
                         {project.metrics.map((m) => (
-                            <div
-                                key={m.label}
-                                className="bg-gray-50 rounded-xl px-3 py-2.5 md:px-4 md:py-3"
-                            >
+                            <div key={m.label} className="bg-gray-50 rounded-xl px-3 py-2.5 md:px-4 md:py-3">
                                 <p className="font-mono text-sm md:text-base font-medium text-gray-900 leading-none mb-1 truncate">
                                     {m.value}
                                 </p>
@@ -134,27 +124,20 @@ export default async function ProjectDetailPage({
 
                 {/* 기술 스택 */}
                 <div className="bg-white rounded-2xl border border-gray-100 px-6 py-5 md:px-8 md:py-6 mb-6">
-                    <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-3">
-                        TECH STACK
-                    </p>
+                    <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-3">TECH STACK</p>
                     <div className="flex flex-wrap gap-2">
                         {project.tech.map((t) => (
-                            <span
-                                key={t}
-                                className="font-mono text-xs text-gray-600 border border-gray-200 rounded-lg px-3 py-1.5 bg-gray-50"
-                            >
-                {t}
-              </span>
+                            <span key={t} className="font-mono text-xs text-gray-600 border border-gray-200 rounded-lg px-3 py-1.5 bg-gray-50">
+                                {t}
+                            </span>
                         ))}
                     </div>
                 </div>
 
-                {/* 링크 (있을 때만) */}
+                {/* 링크 */}
                 {project.links && (
                     <div className="bg-white rounded-2xl border border-gray-100 px-6 py-5 md:px-8 md:py-6 mb-6">
-                        <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-3">
-                            LINKS
-                        </p>
+                        <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-3">LINKS</p>
                         <div className="flex flex-wrap gap-3">
                             {project.links.github && (
                                 <a
@@ -163,11 +146,7 @@ export default async function ProjectDetailPage({
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 font-mono text-xs text-gray-600 border border-gray-200 rounded-lg px-4 py-2 bg-gray-50 hover:border-gray-400 hover:text-gray-900 transition-colors"
                                 >
-                                    <svg
-                                        className="w-3.5 h-3.5"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
+                                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
                                     </svg>
                                     GitHub
@@ -180,174 +159,110 @@ export default async function ProjectDetailPage({
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 font-mono text-xs text-gray-600 border border-gray-200 rounded-lg px-4 py-2 bg-gray-50 hover:border-red-300 hover:text-red-600 transition-colors"
                                 >
-                                    <svg
-                                        className="w-3.5 h-3.5"
-                                        fill="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
+                                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
                                         <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                                     </svg>
-                                    시연 영상
+                                    {isEn ? "Demo Video" : "시연 영상"}
                                 </a>
                             )}
                         </div>
                     </div>
                 )}
 
-                {/* 이미지 */}
+                {/* 다이어그램 */}
                 <div className="flex flex-col gap-4 mb-6">
-                    {/*슬로우쿼리*/}
                     {project.slug === "slow-query" && (
                         <>
-                            {/* 실행계획 Before/After */}
                             <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    EXECUTION PLAN — BEFORE / AFTER
-                                </p>
-                                <SlowQueryExecutionPlan />
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">EXECUTION PLAN — BEFORE / AFTER</p>
+                                <SlowQueryExecutionPlan locale={locale} />
                             </div>
-
-                            {/* 응답속도 개선 차트 */}
                             <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    RESPONSE TIME IMPROVEMENT
-                                </p>
-                                <SlowQueryChart />
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">RESPONSE TIME IMPROVEMENT</p>
+                                <SlowQueryChart locale={locale} />
                             </div>
                         </>
                     )}
 
-                    {/*WIZpay*/}
                     {project.slug === "wizpay" && (
                         <>
-                            {/* 결제 흐름 시퀀스 다이어그램 */}
                             <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    PAYMENT FLOW — SEQUENCE DIAGRAM
-                                </p>
-                                <WizpaySequenceDiagram />
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">PAYMENT FLOW — SEQUENCE DIAGRAM</p>
+                                <WizpaySequenceDiagram locale={locale} />
                             </div>
-
-                            {/* 플랫폼별 분기 플로우 */}
                             <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    PLATFORM BRANCH FLOW
-                                </p>
-                                <WizpayPlatformFlow />
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">PLATFORM BRANCH FLOW</p>
+                                <WizpayPlatformFlow locale={locale} />
                             </div>
                         </>
                     )}
 
-                    {/*MD Review*/}
                     {project.slug === "md-review" && (
                         <>
-                            {/* S3 이중 버킷 처리 플로우 */}
                             <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    S3 IMAGE PROCESSING FLOW
-                                </p>
-                                <MdReviewS3Flow />
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">S3 IMAGE PROCESSING FLOW</p>
+                                <MdReviewS3Flow locale={locale} />
                             </div>
-
-                            {/* 시스템 아키텍처 */}
                             <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    SYSTEM ARCHITECTURE
-                                </p>
-                                <MdReviewArchitecture />
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">SYSTEM ARCHITECTURE</p>
+                                <MdReviewArchitecture locale={locale} />
                             </div>
                         </>
                     )}
 
-                    {/*BO PO improvement*/}
                     {project.slug === "bo-po-improvement" && (
                         <>
-                            {/* 엑셀 업로드 처리 플로우 */}
                             <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    EXCEL UPLOAD PROCESSING FLOW
-                                </p>
-                                <BoPoExcelFlow />
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">EXCEL UPLOAD PROCESSING FLOW</p>
+                                <BoPoExcelFlow locale={locale} />
                             </div>
-
-                            {/* 입점사 상태 전이 다이어그램 */}
                             <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    VENDOR STATUS STATE DIAGRAM
-                                </p>
-                                <BoPoStateDiagram />
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">VENDOR STATUS STATE DIAGRAM</p>
+                                <BoPoStateDiagram locale={locale} />
                             </div>
                         </>
                     )}
 
-                    {/*Togather*/}
                     {project.slug === "togather" && (
                         <>
-                            {/* Spring MVC 레이어 구조 */}
                             <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    SPRING MVC LAYER ARCHITECTURE
-                                </p>
-                                <TogatherMVC />
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">SPRING MVC LAYER ARCHITECTURE</p>
+                                <TogatherMVC locale={locale} />
                             </div>
-
-                            {/* ERD */}
                             <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    ENTITY RELATIONSHIP DIAGRAM
-                                </p>
-                                <TogatherERD />
+                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">ENTITY RELATIONSHIP DIAGRAM</p>
+                                <TogatherERD locale={locale} />
                             </div>
                         </>
                     )}
 
-                    {/*order-system-db*/}
                     {project.slug === "order-system-db" && (
-                        <>
-                            {/* 배달주문 시스템 ERD */}
-                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    DELIVERY ORDER SYSTEM ERD
-                                </p>
-                                <OrderSystemERD />
-                            </div>
-                        </>
+                        <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                            <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">DELIVERY ORDER SYSTEM ERD</p>
+                            <OrderSystemERD locale={locale} />
+                        </div>
                     )}
 
-                    {/*covid-sweepers*/}
                     {project.slug === "covid-sweepers" && (
-                        <>
-                            {/* 멀티스레드 + 소켓 아키텍처 */}
-                            <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
-                                <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">
-                                    MULTI-THREAD · SOCKET ARCHITECTURE
-                                </p>
-                                <CovidSweepersArch />
-                            </div>
-                        </>
+                        <div className="bg-white rounded-2xl border border-gray-100 px-6 py-6 md:px-8 md:py-7">
+                            <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-5">MULTI-THREAD · SOCKET ARCHITECTURE</p>
+                            <CovidSweepersArch locale={locale} />
+                        </div>
                     )}
-
                 </div>
 
                 {/* 상세 섹션들 */}
                 <div className="flex flex-col gap-4">
                     {project.sections.map((section) => (
-                        <div
-                            key={section.title}
-                            className="bg-white rounded-2xl border border-gray-100 px-6 py-5 md:px-8 md:py-6"
-                        >
+                        <div key={section.title} className="bg-white rounded-2xl border border-gray-100 px-6 py-5 md:px-8 md:py-6">
                             <p className="font-mono text-[11px] text-gray-400 tracking-widest mb-4">
                                 {section.title.toUpperCase()}
                             </p>
                             <ul className="flex flex-col gap-2.5">
                                 {section.items.map((item, i) => (
                                     <li key={i} className="flex items-start gap-3">
-                    <span
-                        className={`mt-[7px] w-1.5 h-1.5 rounded-full shrink-0 ${project.accentClass}`}
-                    />
-                                        <span className="text-sm text-gray-600 leading-relaxed">
-                      {item}
-                    </span>
+                                        <span className={`mt-[7px] w-1.5 h-1.5 rounded-full shrink-0 ${project.accentClass}`} />
+                                        <span className="text-sm text-gray-600 leading-relaxed">{item}</span>
                                     </li>
                                 ))}
                             </ul>
@@ -361,14 +276,12 @@ export default async function ProjectDetailPage({
                         href="/projects"
                         className="inline-flex items-center gap-1.5 font-mono text-xs text-gray-400 hover:text-gray-600 transition-colors group"
                     >
-            <span className="inline-block transition-transform duration-200 group-hover:-translate-x-1">
-              ←
-            </span>
-                        모든 프로젝트
+                        <span className="inline-block transition-transform duration-200 group-hover:-translate-x-1">←</span>
+                        {isEn ? "All Projects" : "모든 프로젝트"}
                     </Link>
                     <span className="font-mono text-[11px] text-gray-300">
-            {project.index} / {project.category}
-          </span>
+                        {project.index} / {project.category}
+                    </span>
                 </div>
 
             </div>

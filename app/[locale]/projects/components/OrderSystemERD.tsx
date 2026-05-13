@@ -1,6 +1,7 @@
 // app/projects/[slug]/components/OrderSystemERD.tsx
 
-export default function OrderSystemERD() {
+export default function OrderSystemERD({ locale }: { locale: string }) {
+  const e = locale === "en";
   return (
     <svg width="100%" viewBox="0 0 760 550" className="w-full">
       <defs>
@@ -45,7 +46,7 @@ export default function OrderSystemERD() {
       <text x="591" y="154" dominantBaseline="central" fontSize="11" fill="#2C2C2A">description</text>
       <text x="591" y="172" dominantBaseline="central" fontSize="11" fill="#2C2C2A">is_available</text>
 
-      {/* ── ORDER ── (중앙) */}
+      {/* ── ORDERS (중앙) ── */}
       <rect x="210" y="280" width="170" height="205" rx="8" fill="#FAEEDA" stroke="#BA7517" strokeWidth="1.5"/>
       <rect x="210" y="280" width="170" height="36" rx="8" fill="#BA7517"/>
       <rect x="210" y="302" width="170" height="14" fill="#BA7517"/>
@@ -97,51 +98,44 @@ export default function OrderSystemERD() {
       <text x="616" y="422" dominantBaseline="central" fontSize="11" fill="#2C2C2A">region</text>
 
       {/* ── Relations ── */}
-      {/* CUSTOMER → ORDER */}
       <line x1="97" y1="215" x2="255" y2="280" stroke="#378ADD" strokeWidth="1.5" markerEnd="url(#arr-ord)"/>
       <text x="128" y="244" fontSize="10" fill="#378ADD">1 : N</text>
 
-      {/* RESTAURANT → ORDER */}
       <line x1="340" y1="215" x2="320" y2="280" stroke="#1D9E75" strokeWidth="1.5" markerEnd="url(#arr-ord)"/>
       <text x="338" y="244" fontSize="10" fill="#1D9E75">1 : N</text>
 
-      {/* RESTAURANT → MENU */}
       <line x1="465" y1="120" x2="573" y2="120" stroke="#1D9E75" strokeWidth="1.5" markerEnd="url(#arr-ord)"/>
       <text x="488" y="112" fontSize="10" fill="#1D9E75">1</text>
       <text x="555" y="112" fontSize="10" fill="#1D9E75">N</text>
 
-      {/* ORDER → ORDER_ITEM */}
       <line x1="380" y1="360" x2="428" y2="360" stroke="#BA7517" strokeWidth="1.5" markerEnd="url(#arr-ord)"/>
       <text x="390" y="352" fontSize="10" fill="#BA7517">1</text>
       <text x="412" y="352" fontSize="10" fill="#BA7517">N</text>
 
-      {/* MENU → ORDER_ITEM */}
       <line x1="655" y1="195" x2="530" y2="280" stroke="#1D9E75" strokeWidth="1.5" strokeDasharray="5 3" markerEnd="url(#arr-ord)"/>
       <text x="614" y="232" fontSize="10" fill="#1D9E75">1 : N</text>
 
-      {/* ORDER → DELIVERY */}
       <line x1="210" y1="370" x2="182" y2="370" stroke="#E24B4A" strokeWidth="1.5" markerEnd="url(#arr-ord)"/>
       <text x="188" y="362" fontSize="10" fill="#E24B4A">1</text>
       <text x="204" y="362" fontSize="10" fill="#E24B4A">1</text>
 
-      {/* RIDER → DELIVERY */}
       <line x1="600" y1="360" x2="182" y2="390" stroke="#E24B4A" strokeWidth="1.5" strokeDasharray="5 3" markerEnd="url(#arr-ord)"/>
       <text x="420" y="372" fontSize="10" fill="#E24B4A">1 : N</text>
 
       {/* ── Trigger/Procedure 메모 ── */}
       <rect x="20" y="532" width="720" height="22" rx="4" fill="#F7F6F3"/>
-      <text x="30" y="543" dominantBaseline="central" fontSize="10" fill="#888780">📌 Trigger: 주문 상태 변경 시 DELIVERY.status 자동 갱신</text>
-      <text x="370" y="543" dominantBaseline="central" fontSize="10" fill="#888780">📌 Procedure: 월별 매출 집계 / 라이더 배달 건수 통계</text>
+      <text x="30" y="543" dominantBaseline="central" fontSize="10" fill="#888780">{e ? "📌 Trigger: Auto-update DELIVERY.status on order status change" : "📌 Trigger: 주문 상태 변경 시 DELIVERY.status 자동 갱신"}</text>
+      <text x="440" y="543" dominantBaseline="central" fontSize="10" fill="#888780">{e ? "📌 Procedure: Monthly revenue / Rider delivery stats" : "📌 Procedure: 월별 매출 집계 / 라이더 배달 건수 통계"}</text>
 
       {/* ── Legend ── */}
       <rect x="20"  y="506" width="10" height="10" rx="2" fill="#EBF4FF" stroke="#378ADD" strokeWidth="0.5"/>
-      <text x="36"  y="511" dominantBaseline="central" fontSize="10" fill="#888780">고객</text>
+      <text x="36"  y="511" dominantBaseline="central" fontSize="10" fill="#888780">{e ? "Customer" : "고객"}</text>
       <rect x="80"  y="506" width="10" height="10" rx="2" fill="#E1F5EE" stroke="#1D9E75" strokeWidth="0.5"/>
-      <text x="96"  y="511" dominantBaseline="central" fontSize="10" fill="#888780">식당 · 메뉴</text>
+      <text x="96"  y="511" dominantBaseline="central" fontSize="10" fill="#888780">{e ? "Restaurant · Menu" : "식당 · 메뉴"}</text>
       <rect x="180" y="506" width="10" height="10" rx="2" fill="#FAEEDA" stroke="#BA7517" strokeWidth="0.5"/>
-      <text x="196" y="511" dominantBaseline="central" fontSize="10" fill="#888780">주문 · 주문항목</text>
+      <text x="196" y="511" dominantBaseline="central" fontSize="10" fill="#888780">{e ? "Order · Items" : "주문 · 주문항목"}</text>
       <rect x="310" y="506" width="10" height="10" rx="2" fill="#FCEBEB" stroke="#E24B4A" strokeWidth="0.5"/>
-      <text x="326" y="511" dominantBaseline="central" fontSize="10" fill="#888780">배달 · 라이더</text>
+      <text x="326" y="511" dominantBaseline="central" fontSize="10" fill="#888780">{e ? "Delivery · Rider" : "배달 · 라이더"}</text>
       <text x="440" y="511" dominantBaseline="central" fontSize="10" fill="#085041">🔑 PK</text>
       <text x="490" y="511" dominantBaseline="central" fontSize="10" fill="#854F0B">🔗 FK</text>
     </svg>
