@@ -5,7 +5,6 @@
 import { useState } from "react";
 import type { Project } from "../projectData";
 
-// ── 시각화 컴포넌트 import ──────────────────────────────────────────
 import SlowQueryExecutionPlan from "../components/SlowQueryExecutionPlan";
 import SlowQueryChart from "../components/SlowQueryChart";
 import WizpaySequenceDiagram from "../components/WizpaySequenceDiagram";
@@ -19,8 +18,7 @@ import TogatherMVC from "../components/TogatherMVC";
 import OrderSystemERD from "../components/OrderSystemERD";
 import CovidSweepersArch from "../components/CovidSweepersArch";
 
-// ── 시각화 렌더러 ───────────────────────────────────────────────────
-function ProjectVisuals({ slug, accentClass }: { slug: string; accentClass: string }) {
+function ProjectVisuals({ slug, accentClass, locale }: { slug: string; accentClass: string; locale: string }) {
     const card = "bg-gray-50 rounded-xl border border-gray-100 px-5 py-5 md:px-6 md:py-6";
     const label = "font-mono text-[10px] text-gray-400 tracking-widest mb-4";
 
@@ -28,11 +26,11 @@ function ProjectVisuals({ slug, accentClass }: { slug: string; accentClass: stri
         <div className="flex flex-col gap-3">
             <div className={card}>
                 <p className={label}>EXECUTION PLAN ANALYSIS</p>
-                <SlowQueryExecutionPlan />
+                <SlowQueryExecutionPlan locale={locale} />
             </div>
             <div className={card}>
                 <p className={label}>RESPONSE TIME IMPROVEMENT</p>
-                <SlowQueryChart />
+                <SlowQueryChart locale={locale} />
             </div>
         </div>
     );
@@ -41,11 +39,11 @@ function ProjectVisuals({ slug, accentClass }: { slug: string; accentClass: stri
         <div className="flex flex-col gap-3">
             <div className={card}>
                 <p className={label}>PAYMENT FLOW — SEQUENCE DIAGRAM</p>
-                <WizpaySequenceDiagram />
+                <WizpaySequenceDiagram locale={locale} />
             </div>
             <div className={card}>
                 <p className={label}>PLATFORM BRANCH FLOW</p>
-                <WizpayPlatformFlow />
+                <WizpayPlatformFlow locale={locale} />
             </div>
         </div>
     );
@@ -54,11 +52,11 @@ function ProjectVisuals({ slug, accentClass }: { slug: string; accentClass: stri
         <div className="flex flex-col gap-3">
             <div className={card}>
                 <p className={label}>S3 IMAGE PROCESSING FLOW</p>
-                <MdReviewS3Flow />
+                <MdReviewS3Flow locale={locale} />
             </div>
             <div className={card}>
                 <p className={label}>SYSTEM ARCHITECTURE</p>
-                <MdReviewArchitecture />
+                <MdReviewArchitecture locale={locale} />
             </div>
         </div>
     );
@@ -67,11 +65,11 @@ function ProjectVisuals({ slug, accentClass }: { slug: string; accentClass: stri
         <div className="flex flex-col gap-3">
             <div className={card}>
                 <p className={label}>EXCEL UPLOAD PROCESSING FLOW</p>
-                <BoPoExcelFlow />
+                <BoPoExcelFlow locale={locale} />
             </div>
             <div className={card}>
                 <p className={label}>VENDOR STATUS STATE DIAGRAM</p>
-                <BoPoStateDiagram />
+                <BoPoStateDiagram locale={locale} />
             </div>
         </div>
     );
@@ -80,11 +78,11 @@ function ProjectVisuals({ slug, accentClass }: { slug: string; accentClass: stri
         <div className="flex flex-col gap-3">
             <div className={card}>
                 <p className={label}>SPRING MVC LAYER ARCHITECTURE</p>
-                <TogatherMVC />
+                <TogatherMVC locale={locale} />
             </div>
             <div className={card}>
                 <p className={label}>ENTITY RELATIONSHIP DIAGRAM</p>
-                <TogatherERD />
+                <TogatherERD locale={locale} />
             </div>
         </div>
     );
@@ -92,23 +90,23 @@ function ProjectVisuals({ slug, accentClass }: { slug: string; accentClass: stri
     if (slug === "order-system-db") return (
         <div className={card}>
             <p className={label}>DELIVERY ORDER SYSTEM ERD</p>
-            <OrderSystemERD />
+            <OrderSystemERD locale={locale} />
         </div>
     );
 
     if (slug === "covid-sweepers") return (
         <div className={card}>
             <p className={label}>MULTI-THREAD · SOCKET ARCHITECTURE</p>
-            <CovidSweepersArch />
+            <CovidSweepersArch locale={locale} />
         </div>
     );
 
     return null;
 }
 
-// ── 메인 컴포넌트 ──────────────────────────────────────────────────
-export default function ProjectAccordionItem({ project }: { project: Project }) {
+export default function ProjectAccordionItem({ project, locale }: { project: Project; locale: string }) {
     const [open, setOpen] = useState(false);
+    const isEn = locale === "en";
 
     return (
         <div
@@ -125,7 +123,6 @@ export default function ProjectAccordionItem({ project }: { project: Project }) 
                     "px-5 py-5 md:px-7 md:py-6",
                     "transition-colors duration-150",
                     open ? "bg-white" : "hover:bg-gray-50/60",
-                    // accent bar
                     "before:absolute before:left-0 before:top-0 before:h-full before:w-[3px] before:rounded-l-2xl",
                     open ? "before:opacity-100" : "before:opacity-0 hover:before:opacity-60",
                     project.accentClass.replace("bg-", "before:bg-"),
@@ -133,7 +130,6 @@ export default function ProjectAccordionItem({ project }: { project: Project }) 
                 aria-expanded={open}
             >
                 <div className="flex items-start justify-between gap-3">
-                    {/* 왼쪽: 메타 + 제목 */}
                     <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 mb-1 flex-wrap">
                             <p className="font-mono text-[11px] text-gray-400 tracking-wide shrink-0">
@@ -152,7 +148,6 @@ export default function ProjectAccordionItem({ project }: { project: Project }) 
                         </p>
                     </div>
 
-                    {/* 오른쪽: type 배지 + 토글 아이콘 */}
                     <div className="flex items-center gap-2.5 shrink-0 mt-0.5">
             <span
                 className={[
@@ -163,7 +158,6 @@ export default function ProjectAccordionItem({ project }: { project: Project }) 
             >
               {project.type}
             </span>
-                        {/* 토글 화살표 */}
                         <span
                             className={[
                                 "w-6 h-6 rounded-full border border-gray-200 flex items-center justify-center",
@@ -178,12 +172,10 @@ export default function ProjectAccordionItem({ project }: { project: Project }) 
                     </div>
                 </div>
 
-                {/* 요약 (항상 보임) */}
                 <p className="text-sm text-gray-500 leading-relaxed mt-3 pr-2 line-clamp-2">
                     {project.summary}
                 </p>
 
-                {/* 메트릭 + tech (닫혀 있을 때만) */}
                 {!open && (
                     <div className="mt-4 flex items-end justify-between gap-3 flex-wrap">
                         <div className="flex flex-wrap gap-1.5">
@@ -197,7 +189,7 @@ export default function ProjectAccordionItem({ project }: { project: Project }) 
                             ))}
                         </div>
                         <span className="font-mono text-[11px] text-gray-400 shrink-0">
-              펼쳐보기 ↓
+              {isEn ? "Expand ↓" : "펼쳐보기 ↓"}
             </span>
                     </div>
                 )}
@@ -207,7 +199,6 @@ export default function ProjectAccordionItem({ project }: { project: Project }) 
             {open && (
                 <div className="px-5 pb-6 md:px-7 md:pb-7 flex flex-col gap-5">
 
-                    {/* 구분선 */}
                     <div className="h-px bg-gray-100" />
 
                     {/* 메트릭 */}
@@ -244,7 +235,7 @@ export default function ProjectAccordionItem({ project }: { project: Project }) 
                         </div>
                     </div>
 
-                    {/* 링크 (있을 때만) */}
+                    {/* 링크 */}
                     {project.links && (
                         <div>
                             <p className="font-mono text-[10px] text-gray-400 tracking-widest mb-2.5">
@@ -286,7 +277,7 @@ export default function ProjectAccordionItem({ project }: { project: Project }) 
                         <p className="font-mono text-[10px] text-gray-400 tracking-widest mb-2.5">
                             VISUALS
                         </p>
-                        <ProjectVisuals slug={project.slug} accentClass={project.accentClass} />
+                        <ProjectVisuals slug={project.slug} accentClass={project.accentClass} locale={locale} />
                     </div>
 
                     {/* 상세 섹션 */}
@@ -319,7 +310,7 @@ export default function ProjectAccordionItem({ project }: { project: Project }) 
                         className="self-center font-mono text-[11px] text-gray-400 hover:text-gray-600 transition-colors flex items-center gap-1.5 pt-1"
                     >
                         <span className="inline-block rotate-180">↓</span>
-                        접기
+                        {isEn ? "Collapse" : "접기"}
                     </button>
 
                 </div>

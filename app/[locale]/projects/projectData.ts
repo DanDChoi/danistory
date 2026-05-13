@@ -32,7 +32,7 @@ export type Project = {
   };
 };
 
-export const projects: Project[] = [
+const projectsKo: Project[] = [
   {
     slug: "slow-query",
     index: "01",
@@ -436,6 +436,416 @@ export const projects: Project[] = [
   },
 ];
 
-export function getProjectBySlug(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug);
+const projectsEn: Project[] = [
+  {
+    slug: "slow-query",
+    index: "01",
+    category: "Performance Optimization",
+    company: "Axion Group · WIZWID",
+    companyPeriod: "2022.10 – 2025.05",
+    title: "Slow Query Optimization",
+    period: "2023.10 – 2023.12",
+    type: "PERFORMANCE",
+    typeStyle: "bg-blue-50 text-blue-800",
+    accentClass: "bg-blue-500",
+    accentHex: "#378ADD",
+    summary:
+      "Analyzed response delays on key pages including login, mypage, and order detail, achieving over 90% average response time improvement through query logic redesign and index optimization.",
+    metrics: [
+      { value: "97.7%", label: "Max Response Improvement" },
+      { value: "3,000→70ms", label: "Mypage Review" },
+      { value: "90%+", label: "Key Pages Average" },
+    ],
+    tech: ["PostgreSQL", "EXPLAIN ANALYZE", "pgBadger", "DataGrip", "AWS RDS", "CloudWatch", "pg_stat_statements", "auto_explain"],
+    sections: [
+      {
+        title: "Results",
+        items: [
+          "Improved average response time by over 90% on key pages including login, mypage, and order detail",
+          "Mypage product review: 3,000ms → 70ms (~97.7% improvement)",
+          "Claim lookup: 2,600ms → 117ms (~95.5% improvement)",
+          "Coupon issue count: 500ms → 29ms (~94.2% improvement)",
+          "Reduced user drop-off and increased client satisfaction through overall page load improvements",
+        ],
+      },
+      {
+        title: "Role",
+        items: [
+          "Analyzed execution plans and designed index optimizations for large transaction queries on PostgreSQL",
+          "Eliminated redundant queries called repeatedly in common modules and restricted SELECT scope to required data only",
+          "Redesigned query logic considering business workflows, beyond simple tuning",
+        ],
+      },
+      {
+        title: "Technical Details",
+        items: [
+          "Collected slow query logs using pg_stat_statements and auto_explain modules",
+          "Performed detailed execution plan analysis with EXPLAIN ANALYZE, pgBadger, and DataGrip",
+          "Conducted A/B testing of query tuning in development environment before gradual rollout to production",
+          "Built long-term monitoring system by integrating AWS RDS Slow Query Log with CloudWatch metrics",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "wizpay",
+    index: "02",
+    category: "Payment System",
+    company: "Axion Group · WIZWID",
+    companyPeriod: "2022.10 – 2025.05",
+    title: "In-house Payment (WIZpay) Development",
+    period: "2023.01 – 2023.04",
+    type: "FEATURE",
+    typeStyle: "bg-violet-50 text-violet-800",
+    accentClass: "bg-violet-500",
+    accentHex: "#7F77DD",
+    summary:
+      "Developed an in-house payment system that queries member card information in real-time via external API on order entry, automatically branching installment options by card company. Provides a consistent payment experience across PC, mobile web, and app.",
+    metrics: [
+      { value: "3-in-1", label: "PC / Mobile / App" },
+      { value: "Automated", label: "Card-specific option branching" },
+      { value: "CS Reduced", label: "Less manual CS overhead" },
+    ],
+    tech: ["Java", "Spring MVC", "PostgreSQL", "REST API", "jQuery", "Postman"],
+    sections: [
+      {
+        title: "Results",
+        items: [
+          "Provided personalized payment options by querying registered card info via external API in real-time on order entry",
+          "Improved UX through auto-branched UI based on interest-free, installment, and debit/credit card conditions",
+          "Delivered consistent payment experience across PC, mobile web, and app with platform-level UX consistency",
+          "Reduced CS volume and manual sales team overhead by automating complex card company policies",
+        ],
+      },
+      {
+        title: "Role",
+        items: [
+          "Integrated external card company API and handled response data parsing",
+          "Implemented logic to dynamically construct payment options based on card conditions",
+          "Designed API integration to query card info at order entry and auto-reflect it in the UI",
+          "Implemented jQuery-based UI element behavior (select box, etc.) and branched events per platform (PC/Mobile/App)",
+        ],
+      },
+      {
+        title: "Technical Details",
+        items: [
+          "Designed order form API and card company integration logic using Java and Spring MVC",
+          "Handled card information and payment condition storage/retrieval with PostgreSQL",
+          "Implemented dynamic rendering of UI elements and user selection event handling with jQuery",
+          "Performed request/response handling for REST API communication and Postman-based testing",
+          "Controlled event flow and handled responsive behavior across various device environments",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "md-review",
+    index: "03",
+    category: "Feature Development",
+    company: "Axion Group · WIZWID",
+    companyPeriod: "2022.10 – 2025.05",
+    title: "MD Product Review Feature Development",
+    period: "2023.05",
+    type: "FEATURE",
+    typeStyle: "bg-emerald-50 text-emerald-800",
+    accentClass: "bg-emerald-500",
+    accentHex: "#1D9E75",
+    summary:
+      "Restored and improved the MD product review feature that was removed after a site renewal, implementing new management functionality in BackOffice. Designed a safe image processing flow using AWS S3 dual-bucket structure and integrated it with the display module.",
+    metrics: [
+      { value: "S3", label: "Dual-bucket image flow" },
+      { value: "Bulk", label: "BackOffice batch upload" },
+      { value: "Display", label: "Front-end module integration" },
+    ],
+    tech: ["Java", "Spring MVC", "AWS S3", "PostgreSQL", "jQuery", "JSTL", "Git"],
+    sections: [
+      {
+        title: "Results",
+        items: [
+          "Restored and improved a feature lost after site renewal, delivering a new MD product review management system in BackOffice",
+          "Contributed to brand promotion and conversion rate improvement by supporting text and image-based review registration",
+          "Improved operational efficiency by enabling bulk registration from BackOffice",
+        ],
+      },
+      {
+        title: "Role",
+        items: [
+          "Designed the full review registration screen and data processing logic",
+          "Implemented file processing flow: image upload to S3 temp bucket → copy to main bucket on registration",
+          "Built admin screen UI/UX and developed save/query API (jQuery + Spring MVC)",
+          "Handled display module integration to reflect registered reviews on the front-end",
+        ],
+      },
+      {
+        title: "Technical Details",
+        items: [
+          "Developed review registration/query API using Java and Spring MVC",
+          "Implemented image upload and cross-bucket copy processing with AWS S3",
+          "Built dynamic UI in BackOffice using jQuery and JSTL",
+          "Stored and integrated data with PostgreSQL",
+          "Managed version control with Git and SourceTree; developed in IntelliJ",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "bo-po-improvement",
+    index: "04",
+    category: "Operations Automation",
+    company: "Axion Group · WIZWID",
+    companyPeriod: "2022.10 – 2025.05",
+    title: "BO/PO Usability Improvement",
+    period: "2022.10 – 2022.12",
+    type: "AUTOMATION",
+    typeStyle: "bg-amber-50 text-amber-800",
+    accentClass: "bg-amber-500",
+    accentHex: "#BA7517",
+    summary:
+      "Improved operational efficiency of BackOffice/PartnerOffice by introducing bulk MD assignment and vendor offboarding management features. Replaced manual workflows with Excel upload-based automation.",
+    metrics: [
+      { value: "Bulk", label: "Excel batch processing" },
+      { value: "Automated", label: "Offboarding process design" },
+      { value: "BO/PO", label: "Operational efficiency up" },
+    ],
+    tech: ["Java", "Spring MVC", "Apache POI", "PostgreSQL", "jQuery", "Git", "Notion"],
+    sections: [
+      {
+        title: "Results",
+        items: [
+          "Replaced manual workflows with Excel upload-based bulk MD assignment, processing dozens to hundreds of change requests rapidly",
+          "Introduced vendor offboarding management, enabling automatic identification and management of exited vendors in-system",
+          "Contributed to improved operational efficiency and data consistency for BackOffice/PartnerOffice users",
+        ],
+      },
+      {
+        title: "Role",
+        items: [
+          "Analyzed brand/MD change request flows and designed and implemented Excel-based bulk change registration",
+          "Handled Excel data validation and change history logging",
+          "Designed offboarding process based on vendor status and contract expiry, reflecting it in the business workflow",
+          "Designed data model and display logic to identify and manage offboarded vendors from the admin screen",
+        ],
+      },
+      {
+        title: "Technical Details",
+        items: [
+          "Implemented Excel upload processing and data reflection logic using Java and Spring MVC",
+          "Parsed Excel files and performed validation with Apache POI",
+          "Managed status values and per-vendor offboarding flag logic with PostgreSQL",
+          "Handled admin screen UI processing and result feedback display with jQuery",
+          "Managed issues and communication via Git, IntelliJ, and Notion",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "togather",
+    index: "01",
+    category: "Team Project",
+    company: "Korea Software Institute (KOSMO)",
+    companyPeriod: "2021.11 – 2022.04",
+    title: "Togather",
+    period: "2022.03 – 2022.04",
+    type: "TEAM",
+    typeStyle: "bg-emerald-50 text-emerald-800",
+    accentClass: "bg-emerald-500",
+    accentHex: "#1D9E75",
+    summary:
+      "A web community platform for offline meetups by region and interest. Designed and implemented interest-based regular meetup features, and led front-end structure design and Git version control.",
+    metrics: [
+      { value: "Lead", label: "Version control lead" },
+      { value: "Meetup", label: "Interest-based features" },
+      { value: "Board", label: "Photo album · Permission design" },
+    ],
+    tech: ["Java", "Spring", "OracleDB", "MyBatis", "Maven", "Git", "Notion"],
+    links: {
+      github: "https://github.com/DanDChoi/Projects/tree/main/Togather-Dan",
+      youtube: "https://youtu.be/qxBty3xQ-WU",
+    },
+    sections: [
+      {
+        title: "Project Overview",
+        items: [
+          "Web community platform service for offline meetups organized by region and interest",
+          "Team project: led version control and overall project coordination",
+        ],
+      },
+      {
+        title: "Role",
+        items: [
+          "Designed and implemented interest-based regular meetup features",
+          "Developed meetup board, photo album, and access permission features",
+          "Designed SQL queries for required data access",
+          "Led front-end page structure design and screen layout",
+          "Led project version control via Git/GitHub",
+          "Managed overall progress with Notion",
+        ],
+      },
+      {
+        title: "Tech Stack",
+        items: [
+          "Built MVC pattern web application using Java and Spring",
+          "Designed data access layer using OracleDB + MyBatis",
+          "Managed project dependencies with Maven",
+          "Team version control via Git/GitHub",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "order-system-db",
+    index: "02",
+    category: "Personal Project",
+    company: "Korea Software Institute (KOSMO)",
+    companyPeriod: "2021.11 – 2022.04",
+    title: "Order System Database",
+    period: "2021.12 – 2022.01",
+    type: "DATABASE",
+    typeStyle: "bg-blue-50 text-blue-800",
+    accentClass: "bg-blue-500",
+    accentHex: "#378ADD",
+    summary:
+      "A DB design and implementation project for a food delivery order system using Oracle Database. Deepened understanding of databases by writing production-oriented SQL including DDL/DML, triggers, and procedures.",
+    metrics: [
+      { value: "DB", label: "Full design · build" },
+      { value: "Trigger", label: "Procedure authoring" },
+      { value: "Relations", label: "Table flow design" },
+    ],
+    tech: ["Oracle DB", "DDL/DML", "Trigger", "Procedure", "SQL"],
+    links: {
+      github: "https://github.com/DanDChoi/Projects/tree/main/OracleDB",
+    },
+    sections: [
+      {
+        title: "Project Overview",
+        items: [
+          "DB design and implementation for a food delivery order system using Oracle Database",
+          "Personal project aimed at improving overall database understanding and proficiency",
+        ],
+      },
+      {
+        title: "Role",
+        items: [
+          "Designed the full ERD for the delivery order system and defined table relationships",
+          "Wrote production-oriented SQL including DDL/DML, triggers, and procedures",
+          "Designed table relationships and data flow",
+          "Modeled data by domain: orders, delivery, users, menus, etc.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "danistory",
+    index: "01",
+    category: "Side Project",
+    company: "Personal Project",
+    companyPeriod: "2025 – Present",
+    title: "Danistory",
+    period: "2025 – Present",
+    type: "SIDE PROJECT",
+    typeStyle: "bg-teal-50 text-teal-800",
+    accentClass: "bg-teal-500",
+    accentHex: "#0D9488",
+    summary:
+      "A personal website combining resume, portfolio, and blog. Built using vibe coding with Claude Code (AI), while personally handling planning, structure design, and content writing.",
+    metrics: [
+      { value: "Vibe Coding", label: "AI-assisted development" },
+      { value: "Supabase", label: "OAuth + Guestbook DB" },
+      { value: "Vercel", label: "CI/CD auto deployment" },
+    ],
+    tech: ["Next.js 16", "TypeScript", "Tailwind CSS v4", "Supabase", "Vercel", "React"],
+    sections: [
+      {
+        title: "Development Approach",
+        items: [
+          "Implemented using vibe coding with Claude Code (AI)",
+          "Personally handled planning, site structure design, content writing, feedback, and direction decisions",
+          "Learned Next.js App Router and Supabase internals by reviewing and refining AI-generated code",
+        ],
+      },
+      {
+        title: "Key Features",
+        items: [
+          "Integrated resume, portfolio, and blog into a single site",
+          "Markdown-based blog: server-side rendering and code highlighting via remark → rehype-highlight pipeline",
+          "Projects page: technical details visualized with accordion UI and diagram components",
+          "Guestbook: Supabase Auth (Google/Kakao OAuth) integration, own posts deletable only",
+          "Visitor counter, auto-generated sitemap/robots.ts",
+        ],
+      },
+      {
+        title: "Technical Details",
+        items: [
+          "File system routing and server components using Next.js 16 App Router",
+          "Utility-class-only styling with Tailwind CSS v4 (no CSS modules)",
+          "Unified auth and DB handling via a single Supabase client instance",
+          "Markdown frontmatter parsing with gray-matter; static generation at build time",
+          "Designed and implemented Google/Kakao OAuth → /auth/callback flow",
+        ],
+      },
+      {
+        title: "Lessons Learned",
+        items: [
+          "Leveraged Java/Spring backend experience to understand the server/client component boundary in Next.js",
+          "Grasped file system routing and SSG flow with App Router",
+          "Learned data access control concepts through Supabase RLS (Row Level Security) policies",
+        ],
+      },
+    ],
+    links: {
+      github: "https://github.com/DanDChoi/danistory",
+    },
+  },
+  {
+    slug: "covid-sweepers",
+    index: "03",
+    category: "Personal Project",
+    company: "Korea Software Institute (KOSMO)",
+    companyPeriod: "2021.11 – 2022.04",
+    title: "Covid-Sweepers",
+    period: "2021.12",
+    type: "GAME",
+    typeStyle: "bg-rose-50 text-rose-800",
+    accentClass: "bg-rose-500",
+    accentHex: "#D85A30",
+    summary:
+      "A Minesweeper game built with Java Swing. Implemented everything from GUI element design and event handling to multi-user chat using Multi-Thread and Socket.",
+    metrics: [
+      { value: "GUI", label: "Swing game implementation" },
+      { value: "Multi", label: "Thread · Socket" },
+      { value: "Chat", label: "Multi-user chat feature" },
+    ],
+    tech: ["Java", "Swing", "Multi-Thread", "Socket"],
+    links: {
+      github: "https://github.com/DanDChoi/Projects/tree/main/covid-sweepers",
+    },
+    sections: [
+      {
+        title: "Project Overview",
+        items: [
+          "Minesweeper game implementation project using Java GUI",
+          "Combined a COVID-themed minesweeper game with real-time chat functionality",
+        ],
+      },
+      {
+        title: "Role",
+        items: [
+          "Full implementation of Minesweeper game using Java Swing",
+          "GUI element design and event handling",
+          "Simultaneous processing of game logic and chat using Multi-Thread",
+          "Multi-user real-time chat implementation using Socket",
+        ],
+      },
+    ],
+  },
+];
+
+export function getProjects(locale: string): Project[] {
+  return locale === "en" ? projectsEn : projectsKo;
+}
+
+export const projects = projectsKo;
+
+export function getProjectBySlug(slug: string, locale = "ko"): Project | undefined {
+  return getProjects(locale).find((p) => p.slug === slug);
 }
