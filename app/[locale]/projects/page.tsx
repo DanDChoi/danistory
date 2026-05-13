@@ -3,37 +3,10 @@
 // app/projects/page.tsx
 
 import { useState, useMemo } from "react";
-import { projects } from "./projectData";
+import { useLocale } from "next-intl";
+import { getProjects } from "./projectData";
 import ProjectAccordionItem from "./components/ProjectAccordionItem";
 import Link from "next/link";
-
-/* ------------------------------------------------------------------ */
-/*  회사 그룹 정의                                                        */
-/* ------------------------------------------------------------------ */
-
-const GROUPS = [
-  {
-    id: "wizwid",
-    label: "WORK EXPERIENCE",
-    company: "(주)엑시온그룹 · WIZWID",
-    period: "2022.10 – 2025.05",
-    slugs: ["slow-query", "wizpay", "md-review", "bo-po-improvement"],
-  },
-  {
-    id: "kosmo",
-    label: "TRAINING PROJECT",
-    company: "한국소프트웨어 인재개발원 (KOSMO)",
-    period: "2021.11 – 2022.04",
-    slugs: ["togather", "order-system-db", "covid-sweepers"],
-  },
-  {
-    id: "side",
-    label: "SIDE PROJECT",
-    company: "개인 프로젝트",
-    period: "2025 – 현재",
-    slugs: ["danistory"],
-  },
-];
 
 /* ------------------------------------------------------------------ */
 /*  섹션 헤더                                                            */
@@ -71,10 +44,38 @@ function SectionHeader({
 /* ------------------------------------------------------------------ */
 
 export default function ProjectsPage() {
+  const locale = useLocale();
+  const projects = getProjects(locale);
+
+  const isEn = locale === "en";
+
+  const GROUPS = [
+    {
+      id: "wizwid",
+      label: "WORK EXPERIENCE",
+      company: "Axion Group · WIZWID",
+      period: "2022.10 – 2025.05",
+      slugs: ["slow-query", "wizpay", "md-review", "bo-po-improvement"],
+    },
+    {
+      id: "kosmo",
+      label: "TRAINING PROJECT",
+      company: isEn ? "Korea Software Institute (KOSMO)" : "한국소프트웨어 인재개발원 (KOSMO)",
+      period: "2021.11 – 2022.04",
+      slugs: ["togather", "order-system-db", "covid-sweepers"],
+    },
+    {
+      id: "side",
+      label: "SIDE PROJECT",
+      company: isEn ? "Personal Project" : "개인 프로젝트",
+      period: isEn ? "2025 – Present" : "2025 – 현재",
+      slugs: ["danistory"],
+    },
+  ];
+
   const [companyFilter, setCompanyFilter] = useState<string>("all");
   const [techFilter, setTechFilter] = useState<string[]>([]);
 
-  // 전체 tech 태그 추출 (중복 제거, 등장 횟수 많은 순)
   const allTechTags = useMemo(() => {
     const counter = new Map<string, number>();
     projects.forEach((p) =>
@@ -83,9 +84,8 @@ export default function ProjectsPage() {
     return [...counter.entries()]
         .sort((a, b) => b[1] - a[1])
         .map(([tag]) => tag);
-  }, []);
+  }, [projects]);
 
-  // 필터링된 프로젝트 (slug set)
   const filteredSlugs = useMemo(() => {
     return new Set(
         projects
@@ -100,7 +100,7 @@ export default function ProjectsPage() {
             })
             .map((p) => p.slug)
     );
-  }, [companyFilter, techFilter]);
+  }, [companyFilter, techFilter, projects]);
 
   const toggleTech = (tag: string) => {
     setTechFilter((prev) =>
@@ -116,6 +116,13 @@ export default function ProjectsPage() {
   const isFiltered = companyFilter !== "all" || techFilter.length > 0;
   const visibleCount = filteredSlugs.size;
 
+  const labelMap = {
+    all: isEn ? "All" : "전체",
+    wizwid: "WIZWID",
+    kosmo: "KOSMO",
+    side: "SIDE",
+  };
+
   return (
       <main className="min-h-screen bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 md:px-6 py-12 md:py-16">
@@ -128,16 +135,17 @@ export default function ProjectsPage() {
                   Projects
                 </h1>
                 <p className="text-sm text-gray-500 leading-relaxed max-w-xl">
-                  실무와 교육 과정에서 진행한 프로젝트를 정리했습니다.
-                  성능 최적화, 결제 시스템 개발, 운영 자동화, 커뮤니티 플랫폼까지 다양한 경험을 담았습니다.
+                  {isEn
+                    ? "A collection of projects from professional work and training. Covers performance optimization, payment system development, operations automation, and community platforms."
+                    : "실무와 교육 과정에서 진행한 프로젝트를 정리했습니다. 성능 최적화, 결제 시스템 개발, 운영 자동화, 커뮤니티 플랫폼까지 다양한 경험을 담았습니다."}
                 </p>
               </div>
               <Link
                   href="/projects/print"
-                  target="_blank"  // 새 탭으로 열기
+                  target="_blank"
                   className="font-mono text-[11px] text-gray-500 border border-gray-200 rounded-lg px-3 py-2 hover:border-gray-400 hover:text-gray-700 transition-colors flex items-center gap-1.5"
               >
-                PDF 저장 ↗
+                {isEn ? "Save PDF ↗" : "PDF 저장 ↗"}
               </Link>
             </div>
           </header>
@@ -151,7 +159,6 @@ export default function ProjectsPage() {
               COMPANY
             </span>
               {(["all", "wizwid", "kosmo", "side"] as const).map((id) => {
-                const labelMap = { all: "전체", wizwid: "WIZWID", kosmo: "KOSMO", side: "SIDE" };
                 const active = companyFilter === id;
                 return (
                     <button
@@ -203,13 +210,13 @@ export default function ProjectsPage() {
             {isFiltered && (
                 <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
               <span className="font-mono text-[11px] text-gray-400">
-                {visibleCount}개 프로젝트
+                {isEn ? `${visibleCount} projects` : `${visibleCount}개 프로젝트`}
               </span>
                   <button
                       onClick={resetFilters}
                       className="font-mono text-[11px] text-gray-400 hover:text-gray-700 transition-colors flex items-center gap-1"
                   >
-                    × 필터 초기화
+                    {isEn ? "× Reset" : "× 필터 초기화"}
                   </button>
                 </div>
             )}
@@ -242,7 +249,7 @@ export default function ProjectsPage() {
 
                   <div className="flex flex-col gap-3 md:gap-4">
                     {groupProjects.map((project) => (
-                        <ProjectAccordionItem key={project.slug} project={project} />
+                        <ProjectAccordionItem key={project.slug} project={project} locale={locale} />
                     ))}
                   </div>
                 </section>
@@ -253,13 +260,13 @@ export default function ProjectsPage() {
           {visibleCount === 0 && (
               <div className="text-center py-20">
                 <p className="font-mono text-sm text-gray-400 mb-3">
-                  조건에 맞는 프로젝트가 없습니다
+                  {isEn ? "No matching projects found" : "조건에 맞는 프로젝트가 없습니다"}
                 </p>
                 <button
                     onClick={resetFilters}
                     className="font-mono text-[11px] text-gray-500 hover:text-gray-700 border border-gray-200 rounded-lg px-4 py-2 transition-colors"
                 >
-                  필터 초기화
+                  {isEn ? "Reset Filters" : "필터 초기화"}
                 </button>
               </div>
           )}
