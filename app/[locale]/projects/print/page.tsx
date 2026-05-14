@@ -316,39 +316,39 @@ function ProjectVisuals({ slug }: { slug: string }) {
 
     if (slug === "slow-query") return (
         <div className={row2}>
-            <div className={wrap2}><p className={label}>EXECUTION PLAN ANALYSIS</p><SlowQueryExecutionPlan /></div>
-            <div className={wrap2}><p className={label}>RESPONSE TIME IMPROVEMENT</p><SlowQueryChart /></div>
+            <div className={wrap2}><p className={label}>EXECUTION PLAN ANALYSIS</p><SlowQueryExecutionPlan locale="ko" /></div>
+            <div className={wrap2}><p className={label}>RESPONSE TIME IMPROVEMENT</p><SlowQueryChart locale="ko" /></div>
         </div>
     );
     if (slug === "wizpay") return (
         <div className={row2}>
-            <div className={wrap2}><p className={label}>PAYMENT FLOW — SEQUENCE DIAGRAM</p><WizpaySequenceDiagram /></div>
-            <div className={wrap2}><p className={label}>PLATFORM BRANCH FLOW</p><WizpayPlatformFlow /></div>
+            <div className={wrap2}><p className={label}>PAYMENT FLOW — SEQUENCE DIAGRAM</p><WizpaySequenceDiagram locale="ko" /></div>
+            <div className={wrap2}><p className={label}>PLATFORM BRANCH FLOW</p><WizpayPlatformFlow locale="ko" /></div>
         </div>
     );
     if (slug === "md-review") return (
         <div className={row2}>
-            <div className={wrap2}><p className={label}>S3 IMAGE PROCESSING FLOW</p><MdReviewS3Flow /></div>
-            <div className={wrap2}><p className={label}>SYSTEM ARCHITECTURE</p><MdReviewArchitecture /></div>
+            <div className={wrap2}><p className={label}>S3 IMAGE PROCESSING FLOW</p><MdReviewS3Flow locale="ko" /></div>
+            <div className={wrap2}><p className={label}>SYSTEM ARCHITECTURE</p><MdReviewArchitecture locale="ko" /></div>
         </div>
     );
     if (slug === "bo-po-improvement") return (
         <div className={row2}>
-            <div className={wrap2}><p className={label}>EXCEL UPLOAD PROCESSING FLOW</p><BoPoExcelFlow /></div>
-            <div className={wrap2}><p className={label}>VENDOR STATUS STATE DIAGRAM</p><BoPoStateDiagram /></div>
+            <div className={wrap2}><p className={label}>EXCEL UPLOAD PROCESSING FLOW</p><BoPoExcelFlow locale="ko" /></div>
+            <div className={wrap2}><p className={label}>VENDOR STATUS STATE DIAGRAM</p><BoPoStateDiagram locale="ko" /></div>
         </div>
     );
     if (slug === "togather") return (
         <div className={row2}>
-            <div className={wrap2}><p className={label}>SPRING MVC LAYER ARCHITECTURE</p><TogatherMVC /></div>
-            <div className={wrap2}><p className={label}>ENTITY RELATIONSHIP DIAGRAM</p><TogatherERD /></div>
+            <div className={wrap2}><p className={label}>SPRING MVC LAYER ARCHITECTURE</p><TogatherMVC locale="ko" /></div>
+            <div className={wrap2}><p className={label}>ENTITY RELATIONSHIP DIAGRAM</p><TogatherERD locale="ko" /></div>
         </div>
     );
     if (slug === "order-system-db") return (
-        <div className={wrap1}><p className={label}>DELIVERY ORDER SYSTEM ERD</p><OrderSystemERD /></div>
+        <div className={wrap1}><p className={label}>DELIVERY ORDER SYSTEM ERD</p><OrderSystemERD locale="ko" /></div>
     );
     if (slug === "covid-sweepers") return (
-        <div className={wrap1}><p className={label}>MULTI-THREAD · SOCKET ARCHITECTURE</p><CovidSweepersArch /></div>
+        <div className={wrap1}><p className={label}>MULTI-THREAD · SOCKET ARCHITECTURE</p><CovidSweepersArch locale="ko" /></div>
     );
     return null;
 }
